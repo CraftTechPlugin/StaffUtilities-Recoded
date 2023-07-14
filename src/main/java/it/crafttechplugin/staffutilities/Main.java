@@ -26,8 +26,8 @@ public final class Main extends JavaPlugin implements Listener {
 
     public static Main plugin;
 
-    private File configf, msgf;
-    private FileConfiguration config, msg;
+    public static File configf, msgf;
+    public static FileConfiguration config, msg;
 
     public void createFiles() {
         configf = new File(getDataFolder(), "config.yml");
