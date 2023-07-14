@@ -1,7 +1,7 @@
 name: StaffUtilities
 version: 1.0
 authors: [CraftTechPlugin]
-main: it.gramdeveloment.staffutilities.Main
+main: it.crafttechplugin.staffutilities.Main
 depend:  [Vault, LuckPerms]
 loadbefore: [DeluxeHub]
 commands:
