@@ -6,7 +6,7 @@
 
     <groupId>it.reddo</groupId>
     <artifactId>StaffUtilities</artifactId>
-    <version>1.4</version>
+    <version>1.0</version>
     <packaging>jar</packaging>
 
     <name>StaffUtilities</name>
