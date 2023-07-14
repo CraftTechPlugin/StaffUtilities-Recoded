@@ -54,6 +54,7 @@ public final class Main extends JavaPlugin implements Listener {
     }
 
     public void onEnable() {
+        createFiles();
         boolean cup = config.getBoolean("check-update");
         Double cVersion = 1.0;
 
@@ -73,8 +74,6 @@ public final class Main extends JavaPlugin implements Listener {
         }
 
         plugin = this;
-
-        createFiles();
 
         getCommand("reload").setExecutor(new Reload());
 
