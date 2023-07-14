@@ -26,3 +26,4 @@ Messages:
   TpHere: "&eYou have been teleported by %player%"
   Tpall: "&eAll players have been teleported by you"
   noArgs: "&cInsert an argument!"
+  reload: "&eReload completed!"
