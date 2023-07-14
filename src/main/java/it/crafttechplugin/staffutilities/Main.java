@@ -6,23 +6,44 @@ import it.crafttechplugin.staffutilities.Commands.Teleport.tphere;
 import it.crafttechplugin.staffutilities.Events.Events;
 import it.crafttechplugin.staffutilities.UpdateCheck.UpdateChecker;
 import it.crafttechplugin.staffutilities.Utils.ColorTranslateUtil;
+import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public final class Main extends JavaPlugin implements Listener {
 
+
     public static Main plugin;
 
-    public static FileConfiguration data = YamlConfiguration.loadConfiguration(new File(Main.getInstance().getDataFolder(), "locales.En-en.yml"));
-
+    private File msgf;
+    private FileConfiguration msg;
     Double configVersion = Main.getInstance().getConfig().getDouble("version");
+
+    public void createFiles() {
+        msgf = new File(getDataFolder(), "locales.En-en.yml");
+
+        if (!msgf.exists()){
+            msgf.getParentFile().mkdirs();
+            saveResource("locales.EN-en.yml", false);
+        }
+        msg = new YamlConfiguration();
+
+        try {
+            msg.load(msgf);
+        } catch (IOException | InvalidConfigurationException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public void onEnable() {
         boolean cup = Main.getInstance().getConfig().getBoolean("check-update");
@@ -81,7 +102,6 @@ public final class Main extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(this, this);
     }
 
-
     public static Main getInstance() {
         return plugin;
     }
@@ -110,4 +130,28 @@ public final class Main extends JavaPlugin implements Listener {
             });
         }
     }
+
+    FileConfiguration data;
+    File dfile;
+
+    public void setup(Plugin p) {
+        dfile = new File(p.getDataFolder(), "locales.data.yml");
+
+        if(!dfile.exists()) {
+            try {
+                dfile.createNewFile();
+            }
+            catch(IOException e) {
+                getLogger().info("PlexReport Error: Could not create data file");
+            }
+        }
+
+        data = YamlConfiguration.loadConfiguration(dfile);
+
+    }
+
+    public FileConfiguration getData() {
+        return data;
+    }
+
 }
