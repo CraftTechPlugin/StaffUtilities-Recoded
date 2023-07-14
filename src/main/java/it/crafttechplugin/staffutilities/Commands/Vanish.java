@@ -20,18 +20,39 @@ public class Vanish implements CommandExecutor {
         if (commandSender instanceof Player) {
             Player p = (Player) commandSender;
             if (p.hasPermission("staffutilities.vanish")) {
-                if (invisible_list.contains(p)) {
-                    for (Player people : Bukkit.getOnlinePlayers()) {
-                        people.showPlayer(p);
+                if(strings.length == 0) {
+                    if (invisible_list.contains(p)) {
+                        for (Player people : Bukkit.getOnlinePlayers()) {
+                            people.showPlayer(p);
+                        }
+                        invisible_list.remove(p);
+                        p.sendMessage(ColorTranslateUtil.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.VanishOff")));
+                    } else if (!invisible_list.contains(p)) {
+                        for (Player people : Bukkit.getOnlinePlayers()) {
+                            people.hidePlayer(p);
+                        }
+                        invisible_list.add(p);
+                        p.sendMessage(ColorTranslateUtil.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.VanishOn")));
                     }
-                    invisible_list.remove(p);
-                    p.sendMessage(ColorTranslateUtil.getColor(Main.plugin.getConfig().getString("Messages.Prefix")+ Main.plugin.getConfig().getString("Messages.VanishOff")));
-                }else if(!invisible_list.contains(p)) {
-                    for (Player people : Bukkit.getOnlinePlayers()) {
-                        people.hidePlayer(p);
+                }else{
+                    Player target = (Player) Bukkit.getPlayer(strings[0]);
+                    if(target == null) {
+                        p.sendMessage(ColorTranslateUtil.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.offlinePlayer")));
+                    }else {
+                        if (invisible_list.contains(target)) {
+                            for (Player people : Bukkit.getOnlinePlayers()) {
+                                people.showPlayer(target);
+                            }
+                            invisible_list.remove(target);
+                            target.sendMessage(ColorTranslateUtil.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.VanishOff")));
+                        } else if (!invisible_list.contains(target)) {
+                            for (Player people : Bukkit.getOnlinePlayers()) {
+                                people.hidePlayer(target);
+                            }
+                            invisible_list.add(target);
+                            target.sendMessage(ColorTranslateUtil.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.VanishOn")));
+                        }
                     }
-                    invisible_list.add(p);
-                    p.sendMessage(ColorTranslateUtil.getColor(Main.plugin.getConfig().getString("Messages.Prefix")+ Main.plugin.getConfig().getString("Messages.VanishOn")));
                 }
             }else{
                 commandSender.sendMessage(ColorTranslateUtil.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.noPerms")));

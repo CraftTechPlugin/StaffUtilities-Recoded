@@ -19,22 +19,23 @@ public class Fly implements CommandExecutor {
                 if(strings.length == 0) {
                     if (p.getAllowFlight()) {
                         p.setAllowFlight(false);
-                        p.sendMessage(ColorTranslateUtil.getColor(Main.plugin.getConfig().getString("Messages.Prefix") + Main.plugin.getConfig().getString("Messages.FlyOff")));
+                        p.sendMessage(ColorTranslateUtil.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.FlyOff")));
                     } else {
                         p.setAllowFlight(true);
-                        p.sendMessage(ColorTranslateUtil.getColor(msg.getString("Messages.Prefix") + Main.plugin.getConfig().getString("Messages.FlyOn")));
+                        p.sendMessage(ColorTranslateUtil.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.FlyOn")));
                     }
                 }else{
                     Player target = Bukkit.getPlayer(strings[0]);
                     if(target == null){
                         p.sendMessage(ColorTranslateUtil.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.offlinePlayer")));
                     }else{
-                        if (p.getAllowFlight()) {
-                            p.setAllowFlight(false);
-                            p.sendMessage(ColorTranslateUtil.getColor(Main.plugin.getConfig().getString("Messages.Prefix") + Main.plugin.getConfig().getString("Messages.FlyOff")));
+                        if (target.getAllowFlight()) {
+                            target.setAllowFlight(false);
+                            target.sendMessage(ColorTranslateUtil.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.FlyOff")));
                         } else {
-                            p.setAllowFlight(true);
-                            p.send
+                            target.setAllowFlight(true);
+                            target.sendMessage(ColorTranslateUtil.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.FlyOn")));
+                        }
                     }
                 }
             }else{
