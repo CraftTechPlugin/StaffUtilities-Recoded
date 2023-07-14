@@ -14,7 +14,7 @@ public class tphere implements CommandExecutor {
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         if(commandSender instanceof Player){
             Player p = (Player) commandSender;
-            if(p.hasPermission("staffutilities.tphere") || p.hasPermission("staffutilities.*")){
+            if(p.hasPermission("staffutilities.tphere")){
                 if(strings[0].length() == 0){
                     p.sendMessage(ColorTranslateUtil.getColor("&cInsert a player!"));
                 }else{

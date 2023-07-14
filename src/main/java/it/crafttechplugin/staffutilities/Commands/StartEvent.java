@@ -14,7 +14,7 @@ public class StartEvent implements CommandExecutor {
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         if (commandSender instanceof Player) {
             Player p = (Player) commandSender;
-            if (p.hasPermission("staffutilities.startevent") || p.hasPermission("staffutilities.*")) {
+            if (p.hasPermission("staffutilities.startevent")) {
                 p.getWorld().spawnEntity(p.getLocation(), EntityType.LIGHTNING);
                 p.getWorld().spawnEntity(p.getLocation(), EntityType.LIGHTNING);
                 p.getWorld().spawnEntity(p.getLocation(), EntityType.GIANT);
