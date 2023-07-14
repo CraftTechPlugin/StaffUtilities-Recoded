@@ -13,6 +13,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
+import sun.invoke.empty.Empty;
 
 import java.io.File;
 
@@ -29,24 +30,30 @@ public final class Main extends JavaPlugin implements Listener {
         Double cVersion = 1.0;
 
         if (cup) {
-            if (cVersion.equals(configVersion)){
+            new UpdateChecker(this, 108874).getLastestVersion(version ->{
 
-                new UpdateChecker(this, 108874).getLastestVersion(version ->{
+                if(this.getDescription().getVersion().equalsIgnoreCase(version)){
 
-                    if(this.getDescription().getVersion().equalsIgnoreCase(version)){
+                    System.out.println(ColorTranslateUtil.getColor("StaffUtilities » An update was found!"));
 
-                        System.out.println(ColorTranslateUtil.getColor("StaffUtilities » An update was found!"));
+                }else{
 
-                    }else{
+                    System.out.println(ColorTranslateUtil.getColor("StaffUtilities » An update was found!"));
+                }
+            });
+            File configFile = new File(this.getDataFolder(), "config.yml");
+            if (!(cVersion.equals(configVersion)) || !(configFile.exists())){
 
-                        System.out.println(ColorTranslateUtil.getColor("StaffUtilities » An update was found!"));
-                    }
-                });
+                getConfig().options().copyDefaults(true);
+
+                saveConfig();
             }
 
         }
 
         plugin = this;
+
+        getCommand("reload").setExecutor(new Reload());
 
         getCommand("invsee").setExecutor(new InvSee());
 
@@ -73,11 +80,6 @@ public final class Main extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(new Events(), this);
 
         getServer().getPluginManager().registerEvents(this, this);
-
-
-        getConfig().options().copyDefaults(true);
-
-        saveConfig();
     }
 
 
