@@ -13,7 +13,7 @@ public class Gmc implements CommandExecutor {
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         if (commandSender instanceof Player) {
             Player p = (Player) commandSender;
-            if (p.hasPermission("staffutilities.gmc") || p.hasPermission("staffutilities.*")) {
+            if (p.hasPermission("staffutilities.gmc")) {
                 if (p.getGameMode() == GameMode.CREATIVE) {
                     p.setGameMode(GameMode.SURVIVAL);
                     p.sendMessage(ColorTranslateUtil.getColor(Main.plugin.getConfig().getString("Messages.Prefix")+ Main.plugin.getConfig().getString("Messages.GmcOff")));

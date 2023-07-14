@@ -12,7 +12,7 @@ public class Fly implements CommandExecutor {
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         if (commandSender instanceof Player) {
             Player p = (Player) commandSender;
-            if (p.hasPermission("staffutilities.fly") || p.hasPermission("staffutilities.*")) {
+            if (p.hasPermission("staffutilities.fly")) {
                 if(p.getAllowFlight()) {
                     p.setAllowFlight(false);
                     p.sendMessage(ColorTranslateUtil.getColor(Main.plugin.getConfig().getString("Messages.Prefix")+Main.plugin.getConfig().getString("Messages.FlyOff")));

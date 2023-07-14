@@ -1,5 +1,6 @@
 package it.crafttechplugin.staffutilities.Commands;
 
+import it.crafttechplugin.staffutilities.Main;
 import it.crafttechplugin.staffutilities.Utils.ColorTranslateUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -12,7 +13,7 @@ public class InvSee implements CommandExecutor {
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         if(commandSender instanceof Player){
             Player p = (Player) commandSender;
-            if(p.hasPermission("staffutilities.*") || p.hasPermission("staffutilities.invsee")){
+            if(p.hasPermission("staffutilities.invsee")){
                 if(strings.length == 0){
                     p.sendMessage(ColorTranslateUtil.getColor("Insert player"));
                 }else{

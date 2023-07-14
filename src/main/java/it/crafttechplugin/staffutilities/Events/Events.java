@@ -20,7 +20,7 @@ public class Events implements Listener {
             String Senza = ColorTranslateUtil.getColor(Main.getInstance().getConfig().getString("Messages.JoinMessage.Message")).replaceAll("%player%", p.getName());
             String Con = PlaceholderAPI.setPlaceholders(p, Senza);
             e.setJoinMessage(ColorTranslateUtil.getColor(Con));
-        }else if(p.hasPermission("staffutilities.fly") || p.hasPermission("staffutilities.*")){
+        }else if(p.hasPermission("staffutilities.fly")){
             p.setAllowFlight(true);
         }
     }

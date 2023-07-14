@@ -17,7 +17,7 @@ public class Vanish implements CommandExecutor {
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         if (commandSender instanceof Player) {
             Player p = (Player) commandSender;
-            if (p.hasPermission("staffutilities.vanish") || p.hasPermission("staffutilities.*")) {
+            if (p.hasPermission("staffutilities.vanish")) {
                 if (invisible_list.contains(p)) {
                     for (Player people : Bukkit.getOnlinePlayers()) {
                         people.showPlayer(p);

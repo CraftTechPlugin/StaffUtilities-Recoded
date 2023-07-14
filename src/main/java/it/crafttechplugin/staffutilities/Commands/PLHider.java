@@ -17,7 +17,7 @@ public class PLHider implements CommandExecutor {
         if (commandSender instanceof Player) {
             Player p = (Player) commandSender;
             PluginManager pm = getServer().getPluginManager();
-            if(p.hasPermission("staffutilities.plhider") || p.hasPermission("staffutilities.*")) {
+            if(p.hasPermission("staffutilities.plhider")) {
                 String placeholderPlugins = Main.plugin.getConfig().getString("Messages.PLHiderOff");
                 p.sendMessage(ColorTranslateUtil.getColor(placeholderPlugins));
 
