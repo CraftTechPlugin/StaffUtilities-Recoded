@@ -1,8 +1,8 @@
 name: StaffUtilities
-version: 1.4
-authors: [ImReddo_, FrancyFily]
+version: 1.0
+authors: [CraftTechPlugin]
 main: it.gramdeveloment.staffutilities.Main
-depend:  [PlaceHolderAPI, Vault, LuckPerms]
+depend:  [Vault, LuckPerms]
 loadbefore: [DeluxeHub]
 commands:
   gmc:
