@@ -1,5 +1,6 @@
 package it.crafttechplugin.staffutilities.Commands;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import it.crafttechplugin.staffutilities.Main;
@@ -8,11 +9,15 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 public class Vanish implements CommandExecutor {
-    YamlConfiguration msg = (YamlConfiguration) Main.data;
+    private File msgf;
+    private FileConfiguration msg;
+
+
     ArrayList<Player> invisible_list = new ArrayList<>();
 
     @Override

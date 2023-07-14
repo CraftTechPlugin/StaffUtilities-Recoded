@@ -14,7 +14,10 @@ import org.bukkit.entity.Player;
 import java.io.File;
 
 public class EnderChest implements CommandExecutor {
-    YamlConfiguration msg = (YamlConfiguration) Main.data;
+    private File msgf;
+    private FileConfiguration msg;
+
+
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String arg, String[] args) {
 

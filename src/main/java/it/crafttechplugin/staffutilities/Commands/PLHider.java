@@ -6,14 +6,21 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
+
+import java.io.File;
+
 import static org.bukkit.Bukkit.getServer;
 
 public class PLHider implements CommandExecutor {
-    YamlConfiguration msg = (YamlConfiguration) Main.data;
+    private File msgf;
+    private FileConfiguration msg;
+
+
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         if (commandSender instanceof Player) {

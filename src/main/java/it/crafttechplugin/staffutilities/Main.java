@@ -102,6 +102,7 @@ public final class Main extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(new Events(), this);
 
         getServer().getPluginManager().registerEvents(this, this);
+
     }
 
     public static Main getInstance() {
