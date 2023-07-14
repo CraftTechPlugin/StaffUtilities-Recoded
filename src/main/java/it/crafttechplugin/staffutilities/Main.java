@@ -20,23 +20,31 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+@SuppressWarnings("all")
 public final class Main extends JavaPlugin implements Listener {
 
 
     public static Main plugin;
 
-    private File msgf;
-    private FileConfiguration msg;
-    Double configVersion = Main.getInstance().getConfig().getDouble("version");
+    private File configf, msgf;
+    private FileConfiguration config, msg;
 
     public void createFiles() {
+        configf = new File(getDataFolder(), "config.yml");
         msgf = new File(getDataFolder(), "locales.En-en.yml");
 
-        if (!msgf.exists()){
+        if (!configf.exists()) {
+            configf.getParentFile().mkdirs();
+            saveResource("config.yml", false);
+        }
+
+        if (!msgf.exists()) {
             msgf.getParentFile().mkdirs();
             saveResource("locales.EN-en.yml", false);
         }
+        config = new YamlConfiguration();
         msg = new YamlConfiguration();
+
 
         try {
             msg.load(msgf);
@@ -50,28 +58,23 @@ public final class Main extends JavaPlugin implements Listener {
         Double cVersion = 1.0;
 
         if (cup) {
-            new UpdateChecker(this, 108874).getLastestVersion(version ->{
+            new UpdateChecker(this, 108874).getLastestVersion(version -> {
 
-                if(this.getDescription().getVersion().equalsIgnoreCase(version)){
+                if (this.getDescription().getVersion().equalsIgnoreCase(version)) {
 
                     System.out.println(ColorTranslateUtil.getColor("StaffUtilities » An update was found!"));
 
-                }else{
+                } else {
 
                     System.out.println(ColorTranslateUtil.getColor("StaffUtilities » An update was found!"));
                 }
             });
-            File configFile = new File(this.getDataFolder(), "config.yml");
-            if (!(cVersion.equals(configVersion)) || !(configFile.exists())){
-
-                getConfig().options().copyDefaults(true);
-
-                saveConfig();
-            }
 
         }
 
         plugin = this;
+
+        createFiles();
 
         getCommand("reload").setExecutor(new Reload());
 
@@ -107,11 +110,11 @@ public final class Main extends JavaPlugin implements Listener {
     }
 
     @EventHandler
-    public void onJoin(PlayerJoinEvent e){
+    public void onJoin(PlayerJoinEvent e) {
 
         Player p = e.getPlayer();
 
-        if(p.hasPermission("staffutilities.updatecheck") || p.hasPermission("staffutilities.*")) {
+        if (p.hasPermission("staffutilities.updatecheck") || p.hasPermission("staffutilities.*")) {
 
             new UpdateChecker(this, 108874).getLastestVersion(version -> {
 
@@ -130,28 +133,4 @@ public final class Main extends JavaPlugin implements Listener {
             });
         }
     }
-
-    FileConfiguration data;
-    File dfile;
-
-    public void setup(Plugin p) {
-        dfile = new File(p.getDataFolder(), "locales.data.yml");
-
-        if(!dfile.exists()) {
-            try {
-                dfile.createNewFile();
-            }
-            catch(IOException e) {
-                getLogger().info("PlexReport Error: Could not create data file");
-            }
-        }
-
-        data = YamlConfiguration.loadConfiguration(dfile);
-
-    }
-
-    public FileConfiguration getData() {
-        return data;
-    }
-
 }
