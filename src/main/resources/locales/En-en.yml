@@ -27,3 +27,4 @@ Messages:
   Tpall: "&eAll players have been teleported by you"
   noArgs: "&cInsert an argument!"
   reload: "&eReload completed!"
+  OfflinePlayer: "&cPlayer Offline!"
