@@ -31,7 +31,7 @@ public final class Main extends JavaPlugin implements Listener {
 
     public void createFiles() {
         configf = new File(getDataFolder(), "config.yml");
-        msgf = new File(getDataFolder(), "./src/main/resources/locales/EN-en.yml");
+        msgf = new File(getDataFolder(), "locales/EN-en.yml");
 
         if (!configf.exists()) {
             configf.getParentFile().mkdirs();
