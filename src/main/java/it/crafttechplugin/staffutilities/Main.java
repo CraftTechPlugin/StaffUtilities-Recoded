@@ -40,7 +40,7 @@ public final class Main extends JavaPlugin implements Listener {
 
         if (!msgf.exists()) {
             msgf.getParentFile().mkdirs();
-            saveResource("locales.EN-en.yml", false);
+            saveResource("./locales/EN-en.yml", false);
         }
         config = new YamlConfiguration();
         msg = new YamlConfiguration();
