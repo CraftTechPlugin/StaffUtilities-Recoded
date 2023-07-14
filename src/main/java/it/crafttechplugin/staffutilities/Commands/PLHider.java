@@ -17,12 +17,9 @@ import java.io.File;
 import static org.bukkit.Bukkit.getServer;
 
 public class PLHider implements CommandExecutor {
-    private File msgf;
-    private FileConfiguration msg;
-
-
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
+        FileConfiguration msg = Main.msg;
         if (commandSender instanceof Player) {
             Player p = (Player) commandSender;
             PluginManager pm = getServer().getPluginManager();

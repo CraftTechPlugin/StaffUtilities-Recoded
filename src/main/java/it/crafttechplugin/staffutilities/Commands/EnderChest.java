@@ -14,13 +14,9 @@ import org.bukkit.entity.Player;
 import java.io.File;
 
 public class EnderChest implements CommandExecutor {
-    private File msgf;
-    private FileConfiguration msg;
-
-
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String arg, String[] args) {
-
+        FileConfiguration msg = Main.msg;
         if(!(sender instanceof Player)) {
             sender.sendMessage(ColorTranslateUtil.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.noPerms")));
             return false;

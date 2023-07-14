@@ -12,12 +12,11 @@ import org.bukkit.entity.Player;
 import java.io.File;
 
 public class StaffUtilitiesCommand implements CommandExecutor {
-    private File msgf;
-    private FileConfiguration msg;
 
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
+        FileConfiguration msg = Main.msg;
         if(commandSender instanceof Player){
             Player p = (Player) commandSender;
             p.sendMessage(ColorTranslateUtil.getColor("&c&lSTAFF&4&lUTILITIES &cby CraftTechPlugin"));

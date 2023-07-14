@@ -14,14 +14,13 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 public class Vanish implements CommandExecutor {
-    private File msgf;
-    private FileConfiguration msg;
 
 
     ArrayList<Player> invisible_list = new ArrayList<>();
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
+        FileConfiguration msg = Main.msg;
         if (commandSender instanceof Player) {
             Player p = (Player) commandSender;
             if (p.hasPermission("staffutilities.vanish")) {

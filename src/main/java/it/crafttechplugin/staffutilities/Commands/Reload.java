@@ -12,14 +12,9 @@ import org.bukkit.entity.Player;
 import java.io.File;
 
 public class Reload implements CommandExecutor {
-    private File msgf;
-    private FileConfiguration msg;
-
-
-
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
-
+        FileConfiguration msg = Main.msg;
         Player p = (Player) commandSender;
         if (p.hasPermission("staffutilities.reload")){
             Main.getInstance().reloadConfig();

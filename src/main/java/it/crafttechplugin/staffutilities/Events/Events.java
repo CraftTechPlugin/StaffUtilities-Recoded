@@ -14,12 +14,11 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import java.io.File;
 
 public class Events implements Listener {
-    private File msgf;
-    private FileConfiguration msg;
 
 
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
+        FileConfiguration msg = Main.msg;
         Player p = e.getPlayer();
         p.setGameMode(GameMode.SURVIVAL);
         e.setJoinMessage(null);
