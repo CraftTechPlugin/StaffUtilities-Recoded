@@ -8,9 +8,11 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 public class Vanish implements CommandExecutor {
+    YamlConfiguration msg = (YamlConfiguration) Main.data;
     ArrayList<Player> invisible_list = new ArrayList<>();
 
     @Override
@@ -31,9 +33,12 @@ public class Vanish implements CommandExecutor {
                     invisible_list.add(p);
                     p.sendMessage(ColorTranslateUtil.getColor(Main.plugin.getConfig().getString("Messages.Prefix")+ Main.plugin.getConfig().getString("Messages.VanishOn")));
                 }
-            }else {
-                p.sendMessage(ColorTranslateUtil.getColor(Main.plugin.getConfig().getString("Messages.Prefix")+ Main.plugin.getConfig().getString("Messages.UnknowCommand")));
+            }else{
+                commandSender.sendMessage(ColorTranslateUtil.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.noPerms")));
             }
-        }return true;
+        }else{
+            commandSender.sendMessage(ColorTranslateUtil.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.noPerms")));
+        }
+        return true;
     }
 }

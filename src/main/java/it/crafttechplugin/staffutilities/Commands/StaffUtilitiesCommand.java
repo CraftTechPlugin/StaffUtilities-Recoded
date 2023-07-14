@@ -1,12 +1,15 @@
 package it.crafttechplugin.staffutilities.Commands;
 
+import it.crafttechplugin.staffutilities.Main;
 import it.crafttechplugin.staffutilities.Utils.ColorTranslateUtil;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 public class StaffUtilitiesCommand implements CommandExecutor {
+    YamlConfiguration msg = (YamlConfiguration) Main.data;
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         if(commandSender instanceof Player){
@@ -26,9 +29,9 @@ public class StaffUtilitiesCommand implements CommandExecutor {
                 p.sendMessage(ColorTranslateUtil.getColor("&b/tp &7(Teleports you from another player)"));;
                 p.sendMessage(ColorTranslateUtil.getColor("&b/tphere &7(Teleports a player to you)"));
             }
-        }else {
-            commandSender.sendMessage("Only players can execute this command");
-        }
+    }else{
+        commandSender.sendMessage(ColorTranslateUtil.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.noPerms")));
+    }
         return false;
     }
 }

@@ -6,10 +6,12 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 
 public class StartEvent implements CommandExecutor {
+    YamlConfiguration msg = (YamlConfiguration) Main.data;
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         if (commandSender instanceof Player) {
@@ -19,10 +21,11 @@ public class StartEvent implements CommandExecutor {
                 p.getWorld().spawnEntity(p.getLocation(), EntityType.LIGHTNING);
                 p.getWorld().spawnEntity(p.getLocation(), EntityType.GIANT);
                 Bukkit.broadcastMessage(ColorTranslateUtil.getColor(Main.plugin.getConfig().getString("Messages.Prefix")+Main.plugin.getConfig().getString("Messages.StartEvent")));
+            }else{
+                commandSender.sendMessage(ColorTranslateUtil.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.noPerms")));
             }
-        }else {
-            Player p = (Player) commandSender;
-            p.sendMessage(ColorTranslateUtil.getColor(Main.plugin.getConfig().getString("Messages.Prefix")+Main.plugin.getConfig().getString("Messages.UnknowCommand")));
+        }else{
+            commandSender.sendMessage(ColorTranslateUtil.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.noPerms")));
         }
         return false;
     }
