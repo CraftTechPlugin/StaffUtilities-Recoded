@@ -37,7 +37,7 @@ public class Vanish implements CommandExecutor {
                 }else{
                     Player target = (Player) Bukkit.getPlayer(strings[0]);
                     if(target == null) {
-                        p.sendMessage(ColorTranslateUtil.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.offlinePlayer")));
+                        p.sendMessage(ColorTranslateUtil.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.OfflinePlayer")));
                     }else {
                         if (invisible_list.contains(target)) {
                             for (Player people : Bukkit.getOnlinePlayers()) {

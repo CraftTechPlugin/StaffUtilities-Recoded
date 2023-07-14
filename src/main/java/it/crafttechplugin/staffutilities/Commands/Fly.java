@@ -27,7 +27,7 @@ public class Fly implements CommandExecutor {
                 }else{
                     Player target = Bukkit.getPlayer(strings[0]);
                     if(target == null){
-                        p.sendMessage(ColorTranslateUtil.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.offlinePlayer")));
+                        p.sendMessage(ColorTranslateUtil.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.OfflinePlayer")));
                     }else{
                         if (target.getAllowFlight()) {
                             target.setAllowFlight(false);
