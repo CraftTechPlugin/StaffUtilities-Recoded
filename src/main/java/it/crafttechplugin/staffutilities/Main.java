@@ -54,7 +54,7 @@ public final class Main extends JavaPlugin implements Listener {
     }
 
     public void onEnable() {
-        boolean cup = Main.getInstance().getConfig().getBoolean("check-update");
+        boolean cup = config.getBoolean("check-update");
         Double cVersion = 1.0;
 
         if (cup) {
