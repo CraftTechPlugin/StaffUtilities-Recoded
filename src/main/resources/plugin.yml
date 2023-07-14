@@ -12,7 +12,11 @@ commands:
   plugins:
   startevent:
   vanish:
+    aliases: ["v"]
   staffutilities:
   tp:
   tphere:
   tpall:
+  enderchest:
+    aliases: ["ec"]
+  invsee:
