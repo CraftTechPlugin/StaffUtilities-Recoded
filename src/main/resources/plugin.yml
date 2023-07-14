@@ -20,3 +20,4 @@ commands:
   enderchest:
     aliases: ["ec"]
   invsee:
+  reload:
