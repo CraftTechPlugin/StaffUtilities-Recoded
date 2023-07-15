@@ -14,12 +14,12 @@ public class Moderation implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if(label.equalsIgnoreCase("ban")) {
-            if(!sender.hasPermission("ban")) {
+            if(!sender.hasPermission("unban")) {
                 return true;
             }
 
-            if(args.length < 3) {
-                helpMessage(sender);
+            if(args.length != 1) {
+                sender.sendMessage("§c/unban <player>");
                 return true;
             }
 
@@ -32,50 +32,13 @@ public class Moderation implements CommandExecutor {
 
             UUID uuid = Main.getInstance().playerInfos.getUuid(targetName);
 
-            if(Main.getInstance().banManager.isBanned(uuid)) {
-                sender.sendMessage("§cThis player is already banned!");
+            if(!Main.getInstance().banManager.isBanned(uuid)) {
+                sender.sendMessage("§cThis player isn't banned!");
                 return true;
             }
 
-            String reason = "";
-            for(int i = 2; i < args.length; i++) {
-                reason += args[i] + " ";
-            }
-
-            if(args[1].equalsIgnoreCase("perm")) {
-                Main.getInstance().banManager.ban(uuid, -1, reason);
-                sender.sendMessage("§cYou banned §6" + Bukkit.getOfflinePlayer(uuid).getName() + " §c(Permanent) §afor : §e" + reason);
-                return true;
-            }
-
-            if(!args[1].contains(":")) {
-                helpMessage(sender);
-                return true;
-            }
-
-            int duration = 0;
-            try {
-                duration = Integer.parseInt(args[1].split(":")[0]);
-            } catch (NumberFormatException e) {
-                sender.sendMessage("§cValue 'duration' must be a number.");
-                return true;
-            }
-
-            if(!TimeUnit.existFromShortcut(args[1].split(":")[1])) {
-                sender.sendMessage("§cThis time unit doesn't exist.");
-                sender.sendMessage("§6--------------------");
-                for(TimeUnit units : TimeUnit.values()) {
-                    sender.sendMessage("§c" + units.getName() + "§7: " + units.getShortcut());
-                }
-                sender.sendMessage("§6--------------------");
-                return true;
-            }
-
-            TimeUnit unit = TimeUnit.getFromShortcut(args[1].split(":")[1]);
-            long banTime = unit.getToSecond() * duration;
-
-            Main.getInstance().banManager.ban(uuid, banTime, reason);
-            sender.sendMessage("§cYou banned §6" + Bukkit.getOfflinePlayer(uuid).getName() + " §c(" + duration + " " + unit.getName() + ") §afor : §e" + reason);
+            Main.getInstance().banManager.unban(uuid);
+            sender.sendMessage("§aYou unbanned §6" + Bukkit.getOfflinePlayer(uuid).getName());
             return true;
         }
 
