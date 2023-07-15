@@ -28,3 +28,4 @@ commands:
   mute:
   unmute:
   bansystem:
+  msg:

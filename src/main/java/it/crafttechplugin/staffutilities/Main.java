@@ -105,6 +105,7 @@ public final class Main extends JavaPlugin implements Listener {
         getCommand("plugins").setExecutor(new PLHider());
         getCommand("startevent").setExecutor(new StartEvent());
         getCommand("vanish").setExecutor(new Vanish());
+        getCommand("msg").setExecutor(new Msg());
     }
 
     public void listeners() {

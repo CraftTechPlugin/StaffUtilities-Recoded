@@ -20,7 +20,7 @@ public class InfosCache {
     public void update() {
 
         //DATABASE
-        if (Main.getInstance().configManager.USE_DATABASE) {
+        if (Main.getInstance().USE_DATABASE) {
             //START
             if (player_infos == null) {
                 player_infos = new HashMap<>();
