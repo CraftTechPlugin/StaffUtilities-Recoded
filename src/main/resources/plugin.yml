@@ -15,6 +15,7 @@ commands:
   vanish:
     aliases: ["v"]
   staffutilities:
+    aliases: ["su"]
   tp:
   tphere:
   tpall:
