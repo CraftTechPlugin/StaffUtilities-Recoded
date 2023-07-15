@@ -18,7 +18,7 @@ public class BanCache {
 
     public void update() {
         //DATABASE
-        if(Main.getInstance().configManager.USE_DATABASE) {
+        if(Main.getInstance().USE_DATABASE) {
             console.sendMessage(Main.getInstance().prefix + "§aUsing database");
 
             //START
