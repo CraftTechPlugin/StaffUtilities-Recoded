@@ -75,7 +75,7 @@ public final class Main extends JavaPlugin implements Listener {
 
         plugin = this;
 
-        getCommand("reload").setExecutor(new Reload());
+        getCommand("creload").setExecutor(new Reload());
 
         getCommand("invsee").setExecutor(new InvSee());
 

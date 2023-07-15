@@ -2,11 +2,12 @@ name: StaffUtilities
 version: 1.0
 authors: [CraftTechPlugin]
 main: it.crafttechplugin.staffutilities.Main
-depend:  [Vault, LuckPerms]
+depend:  [Vault]
+softdepend:
+  - LuckPerms
 loadbefore: [DeluxeHub]
 commands:
   gmc:
-  credits:
   fly:
   pl:
   plugins:
@@ -20,4 +21,4 @@ commands:
   enderchest:
     aliases: ["ec"]
   invsee:
-  reload:
+  creload:
