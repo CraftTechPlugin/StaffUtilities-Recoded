@@ -23,14 +23,12 @@ public class DefaultConfigManager {
     public void loadConfig(){
         FileConfiguration config = Main.config;
 
-        final ConfigurationSection section = config.getConfigurationSection("db");
-
-        USE_DATABASE = section.getBoolean("use_db");
-        DB_URL = section.getString("url");
-        PORT = String.valueOf(section.getInt("port"));
-        DB_NAME = section.getString("db_name");
-        USERNAME = section.getString("username");
-        PASSWORD = section.getString("password");
+        USE_DATABASE = config.getBoolean("db.use_db");
+        DB_URL = config.getString("db.url");
+        PORT = String.valueOf(config.getInt("db.port"));
+        DB_NAME = config.getString("db.db_name");
+        USERNAME = config.getString("db.username");
+        PASSWORD = config.getString("db.password");
     }
 
 }
