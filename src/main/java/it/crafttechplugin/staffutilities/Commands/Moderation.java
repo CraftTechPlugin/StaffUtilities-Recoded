@@ -224,9 +224,8 @@ public class Moderation implements CommandExecutor {
             } else if(args[0].equalsIgnoreCase("reload")) {
                 sender.sendMessage(Main.getInstance().prefix + "§bReloading...");
 
-                Main.getInstance().configManager.loadConfig();
 
-                if(Main.getInstance().configManager.USE_DATABASE)
+                if(Main.getInstance().USE_DATABASE)
                     Main.getInstance().initConnection();
 
                 Main.getInstance().cache.update();
