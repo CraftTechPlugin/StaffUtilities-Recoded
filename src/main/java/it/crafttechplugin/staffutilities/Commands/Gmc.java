@@ -35,7 +35,7 @@ public class Gmc implements CommandExecutor {
                         p.sendMessage(ColorTranslateUtil.getColor(msg.getString("Messages.Prefix")+ msg.getString("Messages.GmcOn")));
                     }
 
-                }else if (strings.length > 3){
+                }else {
                     Player t = Bukkit.getPlayer(strings[0]);
                     if (t==null){
                         p.sendMessage(ColorTranslateUtil.getColor(msg.getString("Messages.Prefix") + msg.getString("OfflinePlayer")));
