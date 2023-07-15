@@ -48,6 +48,7 @@ public final class Main extends JavaPlugin implements Listener {
 
         try {
             msg.load(msgf);
+            config.load(configf);
         } catch (IOException | InvalidConfigurationException e) {
             throw new RuntimeException(e);
         }
