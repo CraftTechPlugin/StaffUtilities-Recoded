@@ -53,6 +53,15 @@ public final class Main extends JavaPlugin implements Listener {
 
     public final String prefix = "§b[StaffUtilities]§r ";
 
+    public boolean USE_DATABASE;
+    public String DB_URL;
+    public String DB_NAME;
+    public String USERNAME;
+    public String PASSWORD;
+    public String PORT;
+
+
+
     public void createFiles() {
         configf = new File(getDataFolder(), "config.yml");
         msgf = new File(getDataFolder(), "locales/EN-en.yml");
@@ -133,8 +142,16 @@ public final class Main extends JavaPlugin implements Listener {
         banYML = new BanYML(this);
         infosYML = new InfosYML(this);
         muteYML = new MuteYML(this);
+        FileConfiguration config = Main.config;
 
-        if(configManager.USE_DATABASE)
+        USE_DATABASE = config.getBoolean("db.use_db");
+        DB_URL = config.getString("db.url");
+        PORT = String.valueOf(config.getInt("db.port"));
+        DB_NAME = config.getString("db.db_name");
+        USERNAME = config.getString("db.username");
+        PASSWORD = config.getString("db.password");
+
+        if(USE_DATABASE)
             initConnection();
 
         commands();

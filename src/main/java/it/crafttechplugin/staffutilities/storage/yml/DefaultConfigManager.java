@@ -13,22 +13,6 @@ public class DefaultConfigManager {
     private File saveFile;
     private YamlConfiguration config;
 
-    public boolean USE_DATABASE;
-    public String DB_URL;
-    public String DB_NAME;
-    public String USERNAME;
-    public String PASSWORD;
-    public String PORT;
 
-    public void loadConfig(){
-        FileConfiguration config = Main.config;
-
-        USE_DATABASE = config.getBoolean("db.use_db");
-        DB_URL = config.getString("db.url");
-        PORT = String.valueOf(config.getInt("db.port"));
-        DB_NAME = config.getString("db.db_name");
-        USERNAME = config.getString("db.username");
-        PASSWORD = config.getString("db.password");
-    }
 
 }
