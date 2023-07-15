@@ -23,7 +23,6 @@ public class StaffUtilitiesCommand implements CommandExecutor {
             if( p.hasPermission("staffutilities.help")){
                 p.sendMessage("");
                 p.sendMessage(ColorTranslateUtil.getColor("&b&lCOMMANDS"));
-                p.sendMessage(ColorTranslateUtil.getColor("&b/credits &7(Show the credits of the plugin)"));
                 p.sendMessage(ColorTranslateUtil.getColor("&b/fly &7(Toggle fly mode)"));
                 p.sendMessage(ColorTranslateUtil.getColor("&b/pl &7(Show the plugin list if you have the permission)"));
                 p.sendMessage(ColorTranslateUtil.getColor("&b/plugins &7(Show the plugin list if you have the permission)"));
@@ -33,6 +32,7 @@ public class StaffUtilitiesCommand implements CommandExecutor {
                 p.sendMessage(ColorTranslateUtil.getColor("&b/gmc &7(Toggle creative gamemode)"));
                 p.sendMessage(ColorTranslateUtil.getColor("&b/tp &7(Teleports you from another player)"));;
                 p.sendMessage(ColorTranslateUtil.getColor("&b/tphere &7(Teleports a player to you)"));
+                p.sendMessage(ColorTranslateUtil.getColor("&b/creload &7(Reload config.yml)"));
             }
     }else{
         commandSender.sendMessage(ColorTranslateUtil.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.noPerms")));
