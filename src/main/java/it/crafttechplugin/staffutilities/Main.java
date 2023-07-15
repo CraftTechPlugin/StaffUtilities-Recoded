@@ -181,9 +181,9 @@ public final class Main extends JavaPlugin implements Listener {
 
         connectionPool = new BasicDataSource();
         connectionPool.setDriverClassName("com.mysql.jdbc.Driver");
-        connectionPool.setUsername(configManager.USERNAME);
-        connectionPool.setPassword(configManager.PASSWORD);
-        connectionPool.setUrl("jdbc:mysql://" + configManager.DB_URL + ":" + configManager.PORT + "/" + configManager.DB_NAME + "?autoReconnect=true");
+        connectionPool.setUsername(USERNAME);
+        connectionPool.setPassword(PASSWORD);
+        connectionPool.setUrl("jdbc:mysql://" + DB_URL + ":" + PORT + "/" + DB_NAME + "?autoReconnect=true");
         connectionPool.setInitialSize(1);
         mysql = new MySQL(connectionPool);
         mysql.createTables();
