@@ -1,7 +1,7 @@
 package it.crafttechplugin.staffutilities.Commands;
 
 import it.crafttechplugin.staffutilities.Main;
-import it.crafttechplugin.staffutilities.Utils.ColorTranslateUtil;
+import it.crafttechplugin.staffutilities.Utils.Colors;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -25,12 +25,12 @@ public class StartEvent implements CommandExecutor {
                 p.getWorld().spawnEntity(p.getLocation(), EntityType.LIGHTNING);
                 p.getWorld().spawnEntity(p.getLocation(), EntityType.LIGHTNING);
                 p.getWorld().spawnEntity(p.getLocation(), EntityType.GIANT);
-                Bukkit.broadcastMessage(ColorTranslateUtil.getColor(Main.plugin.getConfig().getString("Messages.Prefix")+Main.plugin.getConfig().getString("Messages.StartEvent")));
+                Bukkit.broadcastMessage(Colors.getColor(Main.plugin.getConfig().getString("Messages.Prefix")+Main.plugin.getConfig().getString("Messages.StartEvent")));
             }else{
-                commandSender.sendMessage(ColorTranslateUtil.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.noPerms")));
+                commandSender.sendMessage(Colors.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.noPerms")));
             }
         }else{
-            commandSender.sendMessage(ColorTranslateUtil.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.noPerms")));
+            commandSender.sendMessage(Colors.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.noPerms")));
         }
         return false;
     }

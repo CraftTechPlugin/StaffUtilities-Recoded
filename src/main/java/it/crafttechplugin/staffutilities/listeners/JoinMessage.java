@@ -2,7 +2,7 @@ package it.crafttechplugin.staffutilities.listeners;
 
 import it.crafttechplugin.staffutilities.Main;
 import it.crafttechplugin.staffutilities.UpdateCheck.UpdateChecker;
-import it.crafttechplugin.staffutilities.Utils.ColorTranslateUtil;
+import it.crafttechplugin.staffutilities.Utils.Colors;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -21,15 +21,15 @@ public class JoinMessage implements Listener {
 
                 if (Main.getInstance().getDescription().getVersion().equalsIgnoreCase(version)) {
 
-                    p.sendMessage(ColorTranslateUtil.getColor("&b&lSTAFFUTILITIES &8» &bAn update was found!"));
+                    p.sendMessage(Colors.getColor("&b&lSTAFFUTILITIES &8» &bAn update was found!"));
 
-                    p.sendMessage(ColorTranslateUtil.getColor("&7(https://www.spigotmc.org/resources/108874/)"));
+                    p.sendMessage(Colors.getColor("&7(https://www.spigotmc.org/resources/108874/)"));
 
                 } else {
 
-                    p.sendMessage(ColorTranslateUtil.getColor("&b&lSTAFFUTILITIES &8» &bAn update was found!"));
+                    p.sendMessage(Colors.getColor("&b&lSTAFFUTILITIES &8» &bAn update was found!"));
 
-                    p.sendMessage(ColorTranslateUtil.getColor("&7(https://www.spigotmc.org/resources/108874/)"));
+                    p.sendMessage(Colors.getColor("&7(https://www.spigotmc.org/resources/108874/)"));
                 }
             });
         }

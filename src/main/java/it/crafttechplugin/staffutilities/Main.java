@@ -5,7 +5,7 @@ import it.crafttechplugin.staffutilities.Commands.Teleport.tp;
 import it.crafttechplugin.staffutilities.Commands.Teleport.tphere;
 import it.crafttechplugin.staffutilities.listeners.Events;
 import it.crafttechplugin.staffutilities.UpdateCheck.UpdateChecker;
-import it.crafttechplugin.staffutilities.Utils.ColorTranslateUtil;
+import it.crafttechplugin.staffutilities.Utils.Colors;
 import it.crafttechplugin.staffutilities.bans.BanManager;
 import it.crafttechplugin.staffutilities.cache.Cache;
 import it.crafttechplugin.staffutilities.database.MySQL;
@@ -127,11 +127,11 @@ public final class Main extends JavaPlugin implements Listener {
 
                 if (this.getDescription().getVersion().equalsIgnoreCase(version)) {
 
-                    System.out.println(ColorTranslateUtil.getColor("StaffUtilities » An update was found!"));
+                    System.out.println(Colors.getColor("StaffUtilities » An update was found!"));
 
                 } else {
 
-                    System.out.println(ColorTranslateUtil.getColor("StaffUtilities » An update was found!"));
+                    System.out.println(Colors.getColor("StaffUtilities » An update was found!"));
                 }
             });
 
