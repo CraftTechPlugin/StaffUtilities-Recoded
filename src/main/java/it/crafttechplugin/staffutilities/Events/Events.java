@@ -18,16 +18,16 @@ public class Events implements Listener {
 
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
-        FileConfiguration config = Main.config;
+        FileConfiguration msg = Main.msg;
         Player p = e.getPlayer();
         p.setGameMode(GameMode.SURVIVAL);
         e.setJoinMessage(null);
-        if (config.getBoolean("join-message")) {
+        if (Main.getInstance().getConfig().getBoolean("join-message.Enabled")) {
             String Senza = ColorTranslateUtil.getColor(Main.getInstance().getConfig().getString("Messages.JoinMessage.Message")).replaceAll("%player%", p.getName());
             String Con = PlaceholderAPI.setPlaceholders(p, Senza);
             e.setJoinMessage(ColorTranslateUtil.getColor(Con));
         }else if(p.hasPermission("staffutilities.fly")){
-            if(config.getBoolean("join-fly")){
+            if(Main.getInstance().getConfig().getBoolean("join-fly")){
                 p.setAllowFlight(true);
             }
         }
