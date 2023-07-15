@@ -1,7 +1,7 @@
 package it.crafttechplugin.staffutilities.Commands;
 
 import it.crafttechplugin.staffutilities.Main;
-import it.crafttechplugin.staffutilities.Utils.ColorTranslateUtil;
+import it.crafttechplugin.staffutilities.Utils.Colors;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.command.Command;
@@ -18,7 +18,7 @@ public class EnderChest implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command cmd, String arg, String[] args) {
         FileConfiguration msg = Main.msg;
         if(!(sender instanceof Player)) {
-            sender.sendMessage(ColorTranslateUtil.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.noPerms")));
+            sender.sendMessage(Colors.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.noPerms")));
             return false;
         }
         else {
@@ -35,7 +35,7 @@ public class EnderChest implements CommandExecutor {
                 }
             } else if (p.hasPermission("staffutilities.enderchest.other")) {
                 if (args.length == 0) {
-                    sender.sendMessage(ColorTranslateUtil.getColor(msg.getString("Messages.Prefix")) + msg.getString("Messages.noArgs"));
+                    sender.sendMessage(Colors.getColor(msg.getString("Messages.Prefix")) + msg.getString("Messages.noArgs"));
                 } else if (args.length >= 3) {
                     Player t = Bukkit.getPlayer(args[0]);
                     p.openInventory(t.getEnderChest());
