@@ -18,7 +18,7 @@ public class MuteCache {
 
     public void update() {
         //DATABASE
-        if (Main.getInstance().configManager.USE_DATABASE) {
+        if (Main.getInstance().USE_DATABASE) {
 
             //START
             if (muted == null) {
