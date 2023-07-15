@@ -15,6 +15,9 @@ check-update: true #default (true)
 #show a message when a player join the server
 join-message: true #default (true)
 
+#enable/disable fly when a player join
+join-fly: true #default (true)
+
 #
 start-event:
   enabled: true #default (true)

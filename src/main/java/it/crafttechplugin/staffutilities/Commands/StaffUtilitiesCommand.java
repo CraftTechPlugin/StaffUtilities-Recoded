@@ -19,7 +19,7 @@ public class StaffUtilitiesCommand implements CommandExecutor {
         FileConfiguration msg = Main.msg;
         if(commandSender instanceof Player){
             Player p = (Player) commandSender;
-            p.sendMessage(ColorTranslateUtil.getColor("&c&lSTAFF&4&lUTILITIES &cby CraftTechPlugin"));
+            p.sendMessage(ColorTranslateUtil.getColor("&b&lSTAFFUTILITIES by CraftTechPlugin"));
             if( p.hasPermission("staffutilities.help")){
                 p.sendMessage("");
                 p.sendMessage(ColorTranslateUtil.getColor("&b&lCOMMANDS"));

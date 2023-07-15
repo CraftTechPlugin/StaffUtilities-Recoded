@@ -10,7 +10,7 @@
 # %player% - Get player name
 
 Messages:
-  Prefix: "&c&lSTAFF&4&lUTILITIES &8» "
+  Prefix: "&b&lSTAFFUTILITIES &8» "
   noPerms: "&cNo Permissions."
   JoinMessage: "%luckperms_prefix%%player% &7is joined to server"
   PLHider: "Plugins (0):"
