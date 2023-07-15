@@ -1,4 +1,4 @@
-package it.crafttechplugin.staffutilities.Events;
+package it.crafttechplugin.staffutilities.listeners;
 
 import it.crafttechplugin.staffutilities.Main;
 import it.crafttechplugin.staffutilities.Utils.ColorTranslateUtil;

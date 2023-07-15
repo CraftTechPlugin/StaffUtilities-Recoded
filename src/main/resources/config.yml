@@ -8,6 +8,15 @@
 #DON'T TOUCH THIS
 version: 1.0
 
+#configure database (MySQL)
+db:
+  use_db: false #default (false)
+  url: "localhost"
+  port: 3306 #default (3306)
+  db_name: "staffUtilities"
+  username: "root"
+  password: ""
+
 
 #check for update of the plugin (auto update)
 check-update: true #default (true)
@@ -21,3 +30,6 @@ join-fly: true #default (true)
 #
 start-event:
   enabled: true #default (true)
+
+#toggle moderation commands (ban, mute, tempban, tempmute, kick, lock, unlock)
+moderation-feature: true #default (true)

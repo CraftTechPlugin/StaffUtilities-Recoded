@@ -3,31 +3,55 @@ package it.crafttechplugin.staffutilities;
 import it.crafttechplugin.staffutilities.Commands.*;
 import it.crafttechplugin.staffutilities.Commands.Teleport.tp;
 import it.crafttechplugin.staffutilities.Commands.Teleport.tphere;
-import it.crafttechplugin.staffutilities.Events.Events;
+import it.crafttechplugin.staffutilities.listeners.Events;
 import it.crafttechplugin.staffutilities.UpdateCheck.UpdateChecker;
 import it.crafttechplugin.staffutilities.Utils.ColorTranslateUtil;
+import it.crafttechplugin.staffutilities.bans.BanManager;
+import it.crafttechplugin.staffutilities.cache.Cache;
+import it.crafttechplugin.staffutilities.database.MySQL;
+import it.crafttechplugin.staffutilities.infos.PlayerInfos;
+import it.crafttechplugin.staffutilities.listeners.JoinMessage;
+import it.crafttechplugin.staffutilities.listeners.PlayerChat;
+import it.crafttechplugin.staffutilities.listeners.PlayerJoin;
+import it.crafttechplugin.staffutilities.mutes.MuteManager;
+import it.crafttechplugin.staffutilities.storage.yml.BanYML;
+import it.crafttechplugin.staffutilities.storage.yml.DefaultConfigManager;
+import it.crafttechplugin.staffutilities.storage.yml.InfosYML;
+import it.crafttechplugin.staffutilities.storage.yml.MuteYML;
+import org.apache.commons.dbcp.BasicDataSource;
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.SQLException;
 
 @SuppressWarnings("all")
 public final class Main extends JavaPlugin implements Listener {
 
+    private static Main INSTANCE;
+    private BasicDataSource connectionPool;
+    private MySQL mysql;
+    public BanManager banManager = new BanManager();
+    public MuteManager muteManager = new MuteManager();
+    public PlayerInfos playerInfos = new PlayerInfos();
+    public Cache cache = new Cache();
+    public DefaultConfigManager configManager;
+    public BanYML banYML;
+    public InfosYML infosYML;
+    public MuteYML muteYML;
 
     public static Main plugin;
 
     public static File configf, msgf;
     public static FileConfiguration config, msg;
+
+    public final String prefix = "§b[StaffUtilities]§r ";
 
     public void createFiles() {
         configf = new File(getDataFolder(), "config.yml");
@@ -54,6 +78,36 @@ public final class Main extends JavaPlugin implements Listener {
         }
     }
 
+    public void commands() {
+        getCommand("ban").setExecutor(new Moderation());
+        getCommand("unban").setExecutor(new Moderation());
+        getCommand("mute").setExecutor(new Moderation());
+        getCommand("unmute").setExecutor(new Moderation());
+        getCommand("bansystem").setExecutor(new Moderation());
+        getCommand("creload").setExecutor(new Reload());
+        getCommand("invsee").setExecutor(new InvSee());
+        getCommand("enderchest").setExecutor(new EnderChest());
+        getCommand("gmc").setExecutor(new Gmc());
+        getCommand("fly").setExecutor(new Fly());
+        getCommand("tp").setExecutor(new tp());
+        getCommand("tphere").setExecutor(new tphere());
+        getCommand("pl").setExecutor(new PLHider());
+        getCommand("staffutilities").setExecutor(new StaffUtilitiesCommand());
+        getCommand("plugins").setExecutor(new PLHider());
+        getCommand("startevent").setExecutor(new StartEvent());
+        getCommand("vanish").setExecutor(new Vanish());
+    }
+
+    public void listeners() {
+        PluginManager pm = Bukkit.getPluginManager();
+
+        pm.registerEvents(new PlayerChat(), this);
+        pm.registerEvents(new PlayerJoin(), this);
+        pm.registerEvents(new Events(), this);
+        pm.registerEvents(new JoinMessage(), this);
+    }
+
+    @Override
     public void onEnable() {
         createFiles();
         boolean cup = config.getBoolean("check-update");
@@ -76,62 +130,54 @@ public final class Main extends JavaPlugin implements Listener {
 
         plugin = this;
 
-        getCommand("creload").setExecutor(new Reload());
+        banYML = new BanYML(this);
+        infosYML = new InfosYML(this);
+        muteYML = new MuteYML(this);
 
-        getCommand("invsee").setExecutor(new InvSee());
+        if(configManager.USE_DATABASE)
+            initConnection();
 
-        getCommand("enderchest").setExecutor(new EnderChest());
+        commands();
+        listeners();
 
-        getCommand("gmc").setExecutor(new Gmc());
+        cache.update();
 
-        getCommand("fly").setExecutor(new Fly());
+        super.onEnable();
 
-        getCommand("tp").setExecutor(new tp());
+    }
 
-        getCommand("tphere").setExecutor(new tphere());
+    @Override
+    public void onDisable() {
+      cache.update();
 
-        getCommand("pl").setExecutor(new PLHider());
+      super.onDisable();
+    }
 
-        getCommand("staffutilities").setExecutor(new StaffUtilitiesCommand());
+    public void initConnection() {
+        if(connectionPool != null) {
+            try {
+                connectionPool.close();
+            } catch(SQLException e) {
+                e.printStackTrace();
+            }
+        }
 
-        getCommand("plugins").setExecutor(new PLHider());
+        connectionPool = new BasicDataSource();
+        connectionPool.setDriverClassName("com.mysql.jdbc.Driver");
+        connectionPool.setUsername(configManager.USERNAME);
+        connectionPool.setPassword(configManager.PASSWORD);
+        connectionPool.setUrl("jdbc:mysql://" + configManager.DB_URL + ":" + configManager.PORT + "/" + configManager.DB_NAME + "?autoReconnect=true");
+        connectionPool.setInitialSize(1);
+        mysql = new MySQL(connectionPool);
+        mysql.createTables();
+    }
 
-        getCommand("startevent").setExecutor(new StartEvent());
-
-        getCommand("vanish").setExecutor(new Vanish());
-
-        getServer().getPluginManager().registerEvents(new Events(), this);
-
-        getServer().getPluginManager().registerEvents(this, this);
-
+    public MySQL getMysql() {
+        return mysql;
     }
 
     public static Main getInstance() {
         return plugin;
     }
 
-    @EventHandler
-    public void onJoin(PlayerJoinEvent e) {
-
-        Player p = e.getPlayer();
-
-        if (p.hasPermission("staffutilities.updatecheck") || p.hasPermission("staffutilities.*")) {
-
-            new UpdateChecker(this, 108874).getLastestVersion(version -> {
-
-                if (this.getDescription().getVersion().equalsIgnoreCase(version)) {
-
-                    p.sendMessage(ColorTranslateUtil.getColor("&b&lSTAFFUTILITIES &8» &bAn update was found!"));
-
-                    p.sendMessage(ColorTranslateUtil.getColor("&7(https://www.spigotmc.org/resources/108874/)"));
-
-                } else {
-
-                    p.sendMessage(ColorTranslateUtil.getColor("&b&lSTAFFUTILITIES &8» &bAn update was found!"));
-
-                    p.sendMessage(ColorTranslateUtil.getColor("&7(https://www.spigotmc.org/resources/108874/)"));
-                }
-            });
-        }
-    }
 }
