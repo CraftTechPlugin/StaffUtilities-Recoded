@@ -28,3 +28,5 @@ Messages:
   noArgs: "&cInsert an argument!"
   reload: "&eReload completed!"
   OfflinePlayer: "&cPlayer Offline!"
+  received-msg: "&7(From %sender%) » "
+  sended-msg: "&7(To %receiver%) » "
