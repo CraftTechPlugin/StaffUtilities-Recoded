@@ -1,7 +1,6 @@
 package it.crafttechplugin.staffutilities.Commands;
 
 import it.crafttechplugin.staffutilities.Main;
-import it.crafttechplugin.staffutilities.Utils.ColorTranslateUtil;
 import it.crafttechplugin.staffutilities.Utils.Colors;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;

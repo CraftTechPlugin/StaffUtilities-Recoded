@@ -3,16 +3,13 @@ package it.crafttechplugin.staffutilities;
 import it.crafttechplugin.staffutilities.Commands.*;
 import it.crafttechplugin.staffutilities.Commands.Teleport.tp;
 import it.crafttechplugin.staffutilities.Commands.Teleport.tphere;
-import it.crafttechplugin.staffutilities.listeners.Events;
+import it.crafttechplugin.staffutilities.listeners.*;
 import it.crafttechplugin.staffutilities.UpdateCheck.UpdateChecker;
 import it.crafttechplugin.staffutilities.Utils.Colors;
 import it.crafttechplugin.staffutilities.bans.BanManager;
 import it.crafttechplugin.staffutilities.cache.Cache;
 import it.crafttechplugin.staffutilities.database.MySQL;
 import it.crafttechplugin.staffutilities.infos.PlayerInfos;
-import it.crafttechplugin.staffutilities.listeners.JoinMessage;
-import it.crafttechplugin.staffutilities.listeners.PlayerChat;
-import it.crafttechplugin.staffutilities.listeners.PlayerJoin;
 import it.crafttechplugin.staffutilities.mutes.MuteManager;
 import it.crafttechplugin.staffutilities.storage.yml.BanYML;
 import it.crafttechplugin.staffutilities.storage.yml.DefaultConfigManager;
@@ -106,6 +103,7 @@ public final class Main extends JavaPlugin implements Listener {
         getCommand("startevent").setExecutor(new StartEvent());
         getCommand("vanish").setExecutor(new Vanish());
         getCommand("msg").setExecutor(new Msg());
+        getCommand("freeze").setExecutor(new Freeze());
     }
 
     public void listeners() {
@@ -115,6 +113,8 @@ public final class Main extends JavaPlugin implements Listener {
         pm.registerEvents(new PlayerJoin(), this);
         pm.registerEvents(new Events(), this);
         pm.registerEvents(new JoinMessage(), this);
+        pm.registerEvents(new VanishEvent(), this);
+        pm.registerEvents(new FreezeEvent(), this);
     }
 
     @Override

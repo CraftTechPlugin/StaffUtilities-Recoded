@@ -30,3 +30,5 @@ Messages:
   OfflinePlayer: "&cPlayer Offline!"
   received-msg: "&7(From %sender%) » "
   sended-msg: "&7(To %receiver%) » "
+  FreezeOn: "&e%player% has been freezed."
+  FreezeOff: "&e%player% has been unfreezed."
