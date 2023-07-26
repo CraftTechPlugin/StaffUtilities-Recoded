@@ -29,3 +29,4 @@ commands:
   unmute:
   bansystem:
   msg:
+  freeze:

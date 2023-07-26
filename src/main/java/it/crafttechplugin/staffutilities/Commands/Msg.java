@@ -14,6 +14,11 @@ public class Msg implements CommandExecutor {
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         FileConfiguration msg = Main.msg;
         if(commandSender instanceof Player){
+            String sm = "";
+            for(int i = 1; i < strings.length;i++) {
+                String arg = (strings[i] + " ");
+                sm = (sm + arg);
+            }
             Player p = (Player) commandSender;
             if(strings[0].length() == 0){
                 p.sendMessage(Colors.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.noArgs")));
@@ -25,9 +30,10 @@ public class Msg implements CommandExecutor {
                     if(strings[1].length() == 0){
                         p.sendMessage(Colors.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.noArgs")));
                     }else{
-                        String mess = strings[1];
-                        target.sendMessage(Colors.getColor(msg.getString("Messages.received-msg") + mess) .replaceAll("%sender%", p.getName()));
-                        p.sendMessage(Colors.getColor(msg.getString("Messages.sended-msg") + mess) .replaceAll("%receiver%", target.getName()));
+                        if(strings[1] == s) {
+                            target.sendMessage(Colors.getColor(msg.getString("Messages.received-msg") + sm).replaceAll("%sender%", p.getName()));
+                            p.sendMessage(Colors.getColor(msg.getString("Messages.sended-msg") + sm).replaceAll("%receiver%", target.getName()));
+                        }
                     }
                 }
             }

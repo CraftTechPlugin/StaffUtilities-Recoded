@@ -114,7 +114,6 @@ public final class Main extends JavaPlugin implements Listener {
         pm.registerEvents(new Events(), this);
         pm.registerEvents(new JoinMessage(), this);
         pm.registerEvents(new VanishEvent(), this);
-        pm.registerEvents(new FreezeEvent(), this);
     }
 
     @Override
