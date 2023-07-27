@@ -23,7 +23,7 @@ public class Vanish implements CommandExecutor {
         FileConfiguration msg = Main.msg;
         if (commandSender instanceof Player) {
             Player p = (Player) commandSender;
-            if (p.hasPermission("staffutilities.vanish")) {
+            if (p.hasPermission("staffutilities.vanish.use")) {
                 if(strings.length == 0) {
                     if (invisible_list.contains(p)) {
                         for (Player people : Bukkit.getOnlinePlayers()) {
@@ -33,13 +33,15 @@ public class Vanish implements CommandExecutor {
                         p.sendMessage(Colors.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.VanishOff")));
                     } else if (!invisible_list.contains(p)) {
                         for (Player people : Bukkit.getOnlinePlayers()) {
-                            people.hidePlayer(p);
+                            if(!people.hasPermission("staffutilities.vanish.see")) {
+                                people.hidePlayer(p);
+                            }
                         }
                         invisible_list.add(p);
                         p.sendMessage(Colors.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.VanishOn")));
                     }
                 }else{
-                    Player target = (Player) Bukkit.getPlayer(strings[0]);
+                    Player target = Bukkit.getPlayer(strings[0]);
                     if(target == null) {
                         p.sendMessage(Colors.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.OfflinePlayer")));
                     }else {
@@ -51,7 +53,9 @@ public class Vanish implements CommandExecutor {
                             target.sendMessage(Colors.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.VanishOff")));
                         } else if (!invisible_list.contains(target)) {
                             for (Player people : Bukkit.getOnlinePlayers()) {
-                                people.hidePlayer(target);
+                                if(!people.hasPermission("staffutilities.vanish.see")) {
+                                    people.hidePlayer(target);
+                                }
                             }
                             invisible_list.add(target);
                             target.sendMessage(Colors.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.VanishOn")));
