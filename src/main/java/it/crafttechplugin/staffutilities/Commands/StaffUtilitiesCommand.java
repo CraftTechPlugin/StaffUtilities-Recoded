@@ -6,10 +6,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
-
-import java.io.File;
 
 public class StaffUtilitiesCommand implements CommandExecutor {
 
@@ -32,6 +29,7 @@ public class StaffUtilitiesCommand implements CommandExecutor {
                 p.sendMessage(Colors.getColor("&b/gmc &7(Toggle creative gamemode)"));
                 p.sendMessage(Colors.getColor("&b/tp &7(Teleports you from another player)"));;
                 p.sendMessage(Colors.getColor("&b/tphere &7(Teleports a player to you)"));
+                p.sendMessage(Colors.getColor("&b/freeze &7(Freeze a player)"));
                 p.sendMessage(Colors.getColor("&b/creload &7(Reload config.yml)"));
             }
     }else{

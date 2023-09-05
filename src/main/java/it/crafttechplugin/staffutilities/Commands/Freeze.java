@@ -8,17 +8,12 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.player.PlayerDropItemEvent;
-import org.bukkit.event.player.PlayerMoveEvent;
-import org.bukkit.event.player.PlayerPickupItemEvent;
 
 import java.util.ArrayList;
 
 public class Freeze implements CommandExecutor, Listener {
-    public static final ArrayList<Player> freeze_list = new ArrayList<>();
+    public static ArrayList<Player> freeze_list = new ArrayList<>();
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         FileConfiguration msg = Main.msg;
@@ -48,45 +43,5 @@ public class Freeze implements CommandExecutor, Listener {
             commandSender.sendMessage(Colors.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.noPerms")));
         }
         return false;
-    }
-
-    @EventHandler
-    public void onItemPick(PlayerPickupItemEvent event){
-        Player p = event.getPlayer();
-        if(freeze_list.contains(p)){
-            event.setCancelled(true);
-        }else{
-            event.setCancelled(false);
-        }
-    }
-
-    @EventHandler
-    public void onItemDrop(PlayerDropItemEvent event) {
-        Player p = event.getPlayer();
-        if (freeze_list.contains(p)) {
-            event.setCancelled(true);
-        } else {
-            event.setCancelled(false);
-        }
-    }
-
-    @EventHandler
-    public void onDamage(EntityDamageEvent event){
-        Player p = (Player) event.getEntity();
-        if(freeze_list.contains(p)){
-            event.setCancelled(true);
-        }else{
-            event.setCancelled(false);
-        }
-    }
-
-    @EventHandler
-    public void onMove(PlayerMoveEvent event){
-        Player p = (Player) event.getPlayer();
-        if(freeze_list.contains(p)){
-            event.setCancelled(true);
-        }else{
-            event.setCancelled(false);
-        }
     }
 }

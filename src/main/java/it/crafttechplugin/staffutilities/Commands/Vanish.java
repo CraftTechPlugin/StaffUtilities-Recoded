@@ -1,8 +1,5 @@
 package it.crafttechplugin.staffutilities.Commands;
 
-import java.io.File;
-import java.util.ArrayList;
-
 import it.crafttechplugin.staffutilities.Main;
 import it.crafttechplugin.staffutilities.Utils.Colors;
 import org.bukkit.Bukkit;
@@ -10,13 +7,15 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Listener;
 
-public class Vanish implements CommandExecutor {
+import java.util.ArrayList;
+
+public class Vanish implements CommandExecutor, Listener {
 
 
-    ArrayList<Player> invisible_list = new ArrayList<>();
+    public static ArrayList<Player> invisible_list = new ArrayList<>();
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
@@ -24,7 +23,7 @@ public class Vanish implements CommandExecutor {
         if (commandSender instanceof Player) {
             Player p = (Player) commandSender;
             if (p.hasPermission("staffutilities.vanish.use")) {
-                if(strings.length == 0) {
+                if (strings.length == 0) {
                     if (invisible_list.contains(p)) {
                         for (Player people : Bukkit.getOnlinePlayers()) {
                             people.showPlayer(p);
@@ -33,18 +32,18 @@ public class Vanish implements CommandExecutor {
                         p.sendMessage(Colors.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.VanishOff")));
                     } else if (!invisible_list.contains(p)) {
                         for (Player people : Bukkit.getOnlinePlayers()) {
-                            if(!people.hasPermission("staffutilities.vanish.see")) {
+                            if (!people.hasPermission("staffutilities.vanish.see")) {
                                 people.hidePlayer(p);
                             }
                         }
                         invisible_list.add(p);
                         p.sendMessage(Colors.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.VanishOn")));
                     }
-                }else{
+                } else {
                     Player target = Bukkit.getPlayer(strings[0]);
-                    if(target == null) {
+                    if (target == null) {
                         p.sendMessage(Colors.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.OfflinePlayer")));
-                    }else {
+                    } else {
                         if (invisible_list.contains(target)) {
                             for (Player people : Bukkit.getOnlinePlayers()) {
                                 people.showPlayer(target);
@@ -53,7 +52,7 @@ public class Vanish implements CommandExecutor {
                             target.sendMessage(Colors.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.VanishOff")));
                         } else if (!invisible_list.contains(target)) {
                             for (Player people : Bukkit.getOnlinePlayers()) {
-                                if(!people.hasPermission("staffutilities.vanish.see")) {
+                                if (!people.hasPermission("staffutilities.vanish.see")) {
                                     people.hidePlayer(target);
                                 }
                             }
@@ -62,13 +61,12 @@ public class Vanish implements CommandExecutor {
                         }
                     }
                 }
-            }else{
+            } else {
                 commandSender.sendMessage(Colors.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.noPerms")));
             }
-        }else{
+        } else {
             commandSender.sendMessage(Colors.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.noPerms")));
         }
         return true;
     }
-
 }

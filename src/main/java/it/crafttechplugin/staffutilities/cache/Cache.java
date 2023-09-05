@@ -1,9 +1,6 @@
 package it.crafttechplugin.staffutilities.cache;
 
-import org.bukkit.Bukkit;
-import org.bukkit.command.ConsoleCommandSender;
-
-import java.util.*;
+import java.util.UUID;
 
 public class Cache {
 

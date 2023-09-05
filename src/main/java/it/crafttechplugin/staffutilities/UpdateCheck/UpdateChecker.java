@@ -1,9 +1,9 @@
 package it.crafttechplugin.staffutilities.UpdateCheck;
 
 import it.crafttechplugin.staffutilities.Main;
-
 import it.crafttechplugin.staffutilities.Utils.Colors;
 import org.bukkit.Bukkit;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;

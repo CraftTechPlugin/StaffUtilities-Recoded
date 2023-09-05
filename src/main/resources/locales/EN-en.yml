@@ -32,3 +32,5 @@ Messages:
   sended-msg: "&7(To %receiver%) » "
   FreezeOn: "&e%player% has been freezed."
   FreezeOff: "&e%player% has been unfreezed."
+  ReportSuccess: "&e%target% has been reported."
+  ReportReceived: "&e%player% reported %target%"

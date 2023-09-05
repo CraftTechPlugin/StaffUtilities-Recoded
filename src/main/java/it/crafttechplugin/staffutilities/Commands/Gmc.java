@@ -1,21 +1,14 @@
 package it.crafttechplugin.staffutilities.Commands;
 
-import com.sun.org.apache.xpath.internal.operations.Variable;
 import it.crafttechplugin.staffutilities.Main;
-import it.crafttechplugin.staffutilities.Main.*;
 import it.crafttechplugin.staffutilities.Utils.Colors;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
-
-import java.io.File;
-import java.io.IOException;
 
 public class Gmc implements CommandExecutor {
 

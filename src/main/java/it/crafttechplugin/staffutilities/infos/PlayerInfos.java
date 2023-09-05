@@ -1,10 +1,8 @@
 package it.crafttechplugin.staffutilities.infos;
 
 import it.crafttechplugin.staffutilities.Main;
-import it.crafttechplugin.staffutilities.storage.yml.DefaultConfigManager;
 import org.bukkit.entity.Player;
 
-import java.sql.SQLException;
 import java.util.UUID;
 
 public class PlayerInfos {
