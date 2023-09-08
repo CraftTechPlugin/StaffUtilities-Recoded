@@ -104,6 +104,7 @@ public final class Main extends JavaPlugin implements Listener {
         getCommand("vanish").setExecutor(new Vanish());
         getCommand("msg").setExecutor(new Msg());
         getCommand("freeze").setExecutor(new Freeze());
+        getCommand("fix").setExecutor(new Fix());
     }
 
     public void listeners() {
