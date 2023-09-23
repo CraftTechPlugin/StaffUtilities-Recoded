@@ -31,6 +31,7 @@ public class StaffUtilitiesCommand implements CommandExecutor {
                 p.sendMessage(Colors.getColor("&b/tphere &7(Teleports a player to you)"));
                 p.sendMessage(Colors.getColor("&b/freeze &7(Freeze a player)"));
                 p.sendMessage(Colors.getColor("&b/creload &7(Reload config.yml)"));
+                p.sendMessage(Colors.getColor("&b/staffvanish &7(Toggle staffvanish)"));
             }
     }else{
         commandSender.sendMessage(Colors.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.noPerms")));

@@ -8,6 +8,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
 
+import static it.crafttechplugin.staffutilities.Commands.SpyCommand.spylogs;
+
 public class PlayerJoin implements Listener {
 
     @EventHandler
@@ -16,6 +18,8 @@ public class PlayerJoin implements Listener {
         PlayerInfos playerInfos = Main.getInstance().playerInfos;
 
         playerInfos.update(player);
+
+        spylogs.add(player);
     }
 
     @EventHandler

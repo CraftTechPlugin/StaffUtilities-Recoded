@@ -21,7 +21,7 @@ public class tp implements CommandExecutor {
         if(commandSender instanceof Player){
             Player p = (Player) commandSender;
             if(p.hasPermission("staffutilities.tp")){
-                if(strings[0].length() == 0){
+                if(strings.length == 0){
                     p.sendMessage(Colors.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.noArguments")));
                 }else{
                     Player target = Bukkit.getPlayer(strings[0]);

@@ -22,7 +22,7 @@ public class tphere implements CommandExecutor {
         if(commandSender instanceof Player){
             Player p = (Player) commandSender;
             if(p.hasPermission("staffutilities.tphere")){
-                if(strings[0].length() == 0){
+                if(strings.length == 0){
                     p.sendMessage(Colors.getColor(Main.getInstance().getConfig().getString("Messages.Prefix") + Main.getInstance().getConfig().getString("Messages.noArguments")));
                 }else{
                     Player target = Bukkit.getPlayer(strings[0]);

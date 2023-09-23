@@ -105,6 +105,8 @@ public final class Main extends JavaPlugin implements Listener {
         getCommand("msg").setExecutor(new Msg());
         getCommand("freeze").setExecutor(new Freeze());
         getCommand("fix").setExecutor(new Fix());
+        getCommand("spy").setExecutor(new SpyCommand());
+        getCommand("staffvanish").setExecutor(new StaffVanish());
     }
 
     public void listeners() {
@@ -114,7 +116,8 @@ public final class Main extends JavaPlugin implements Listener {
         pm.registerEvents(new PlayerJoin(), this);
         pm.registerEvents(new Events(), this);
         pm.registerEvents(new JoinMessage(), this);
-        pm.registerEvents(new VanishEvent(), this);
+        pm.registerEvents(new VanishListener(), this);
+        pm.registerEvents(new SpyLogs(), this);
     }
 
     @Override

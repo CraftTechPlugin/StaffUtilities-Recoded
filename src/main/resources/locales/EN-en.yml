@@ -10,7 +10,7 @@
 # %player% - Get player name
 
 Messages:
-  Prefix: "&b&lSTAFFUTILITIES &8» "
+  Prefix: "&b&lSTAFFUTILITIES &7» "
   noPerms: "&cNo Permissions."
   JoinMessage: "%luckperms_prefix%%player% &7is joined to server"
   PLHider: "Plugins (0):"
@@ -36,3 +36,8 @@ Messages:
   ReportReceived: "&e%player% reported %target%."
   ItemFixed: "&eItem in your hand has been fixed."
   InventoryFixed: "&eItems in your inventory has been fixed."
+  StaffVanishon: "&eStaffvanish &aenabled!"
+  StaffVanishoff: "&eStaffvanish &cdisabled!"
+  SpyLogson: "&eSpy logs &aenabled!"
+  SpyLogsoff: "&eSpy logs &cdisabled!"
+  SpyPrefix: "&b&lSPY &7» "
