@@ -58,7 +58,7 @@ public class StaffMode implements CommandExecutor {
                             people.showPlayer(p);
                         }
                     }else{
-                        ItemStack vanish = new ItemStack(DyeColor.GRAY.getData());
+                        ItemStack vanish = new ItemStack(DyeColor.RED.getData());
                         ItemMeta vanishmeta = vanish.getItemMeta();
                         vanishmeta.setDisplayName(Color.getColor("&c&lVANISH OFF"));
                         ArrayList<String> vanishlore = new ArrayList<>();
