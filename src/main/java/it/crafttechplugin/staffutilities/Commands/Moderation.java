@@ -14,7 +14,7 @@ public class Moderation implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if(label.equalsIgnoreCase("ban")) {
-            if(!sender.hasPermission("ban")) {
+            if(!sender.hasPermission("staffutilities.ban")) {
                 return true;
             }
 

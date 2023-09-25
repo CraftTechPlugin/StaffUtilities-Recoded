@@ -4,7 +4,7 @@ import it.crafttechplugin.staffutilities.Commands.*;
 import it.crafttechplugin.staffutilities.Commands.Teleport.tp;
 import it.crafttechplugin.staffutilities.Commands.Teleport.tphere;
 import it.crafttechplugin.staffutilities.UpdateCheck.UpdateChecker;
-import it.crafttechplugin.staffutilities.Utils.Colors;
+import it.crafttechplugin.staffutilities.Utils.Color;
 import it.crafttechplugin.staffutilities.bans.BanManager;
 import it.crafttechplugin.staffutilities.cache.Cache;
 import it.crafttechplugin.staffutilities.database.MySQL;
@@ -100,6 +100,7 @@ public final class Main extends JavaPlugin implements Listener {
         getCommand("startevent").setExecutor(new StartEvent());
         getCommand("vanish").setExecutor(new Vanish());
         getCommand("msg").setExecutor(new Msg());
+        getCommand("staffmode").setExecutor(new StaffMode());
         getCommand("freeze").setExecutor(new Freeze());
         getCommand("fix").setExecutor(new Fix());
         getCommand("spy").setExecutor(new SpyCommand());
@@ -111,6 +112,7 @@ public final class Main extends JavaPlugin implements Listener {
 
         pm.registerEvents(new PlayerChat(), this);
         pm.registerEvents(new PlayerJoin(), this);
+        pm.registerEvents(new StaffListener(), this);
         pm.registerEvents(new Events(), this);
         pm.registerEvents(new JoinMessage(), this);
         pm.registerEvents(new VanishListener(), this);
@@ -128,11 +130,11 @@ public final class Main extends JavaPlugin implements Listener {
 
                 if (this.getDescription().getVersion().equalsIgnoreCase(version)) {
 
-                    System.out.println(Colors.getColor("StaffUtilities » An update was found!"));
+                    System.out.println(Color.getColor("StaffUtilities » An update was found!"));
 
                 } else {
 
-                    System.out.println(Colors.getColor("StaffUtilities » An update was found!"));
+                    System.out.println(Color.getColor("StaffUtilities » An update was found!"));
                 }
             });
 
