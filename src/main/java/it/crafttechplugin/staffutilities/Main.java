@@ -90,16 +90,13 @@ public final class Main extends JavaPlugin implements Listener {
         getCommand("mute").setExecutor(new Moderation());
         getCommand("unmute").setExecutor(new Moderation());
         getCommand("bansystem").setExecutor(new Moderation());
-        getCommand("creload").setExecutor(new Reload());
         getCommand("invsee").setExecutor(new InvSee());
         getCommand("enderchest").setExecutor(new EnderChest());
         getCommand("gmc").setExecutor(new Gmc());
         getCommand("fly").setExecutor(new Fly());
         getCommand("tp").setExecutor(new tp());
         getCommand("tphere").setExecutor(new tphere());
-        getCommand("pl").setExecutor(new PLHider());
-        getCommand("staffutilities").setExecutor(new StaffUtilitiesCommand());
-        getCommand("plugins").setExecutor(new PLHider());
+        getCommand("staffutilities").setExecutor(new StaffUtilitiesCommand(this));
         getCommand("startevent").setExecutor(new StartEvent());
         getCommand("vanish").setExecutor(new Vanish());
         getCommand("msg").setExecutor(new Msg());

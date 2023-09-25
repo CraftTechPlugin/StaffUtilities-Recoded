@@ -1,7 +1,7 @@
 package it.crafttechplugin.staffutilities.Commands;
 
 import it.crafttechplugin.staffutilities.Main;
-import it.crafttechplugin.staffutilities.Utils.Color;
+import it.crafttechplugin.staffutilities.Utils.Colors;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -22,7 +22,7 @@ public class PLHider implements CommandExecutor {
             PluginManager pm = getServer().getPluginManager();
             if(p.hasPermission("staffutilities.plhider")) {
                 String placeholderPlugins = Main.plugin.getConfig().getString("Messages.PLHiderOff");
-                p.sendMessage(Color.getColor(placeholderPlugins));
+                p.sendMessage(Colors.getColor(placeholderPlugins));
 
                 for (Plugin plugins : pm.getPlugins()) {
                     ChatColor color;
@@ -36,12 +36,12 @@ public class PLHider implements CommandExecutor {
                     p.sendMessage(color + plugins.getName());
                 }
             } else {
-                p.sendMessage(Color.getColor(Main.plugin.getConfig().getString("Messages.PLHider")));
+                p.sendMessage(Colors.getColor(Main.plugin.getConfig().getString("Messages.PLHider")));
             }
         } else {
             PluginManager pm = getServer().getPluginManager();
             String placeholderPlugins = Main.plugin.getConfig().getString("Messages.PLHiderOff");
-            commandSender.sendMessage(Color.getColor(placeholderPlugins));
+            commandSender.sendMessage(Colors.getColor(placeholderPlugins));
 
             for (Plugin plugins : pm.getPlugins()) {
                 ChatColor color;
