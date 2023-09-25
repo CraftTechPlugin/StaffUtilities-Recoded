@@ -2,6 +2,7 @@ package it.crafttechplugin.staffutilities.Commands;
 
 import it.crafttechplugin.staffutilities.Utils.Color;
 import org.bukkit.Bukkit;
+import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -25,7 +26,7 @@ public class StaffMode implements CommandExecutor {
                 if(!staffmode_list.contains(p)){
                     ItemStack randomtp = new ItemStack(Material.COMPASS);
                     ItemMeta randomtpmeta = randomtp.getItemMeta();
-                    randomtpmeta.setDisplayName(Color.getColor("&bRANDOM TELEPORT"));
+                    randomtpmeta.setDisplayName(Color.getColor("&e&lRANDOM TELEPORT"));
                     ArrayList<String> lore = new ArrayList<>();
                     lore.add(Color.getColor("&bRight-click to"));
                     lore.add(Color.getColor("&bTeleport from a"));
@@ -35,26 +36,50 @@ public class StaffMode implements CommandExecutor {
 
                     ItemStack invsee = new ItemStack(Material.BOOK);
                     ItemMeta invseemeta = invsee.getItemMeta();
-                    invseemeta.setDisplayName(Color.getColor("&bINVSEE"));
+                    invseemeta.setDisplayName(Color.getColor("&b&lINVSEE"));
                     ArrayList<String> loreinvsee = new ArrayList<>();
                     loreinvsee.add(Color.getColor("&bRight-click to"));
                     loreinvsee.add(Color.getColor("&bOpen a player's"));
                     loreinvsee.add(Color.getColor("&bInventory."));
                     randomtpmeta.setLore(loreinvsee);
                     invsee.setItemMeta(invseemeta);
-                    if(invisible_list.contains(p)){
-                        invisible_list.remove(p);
+                    if(!invisible_list.contains(p)){
+                        invisible_list.add(p);
+                        ItemStack vanish = new ItemStack(DyeColor.GRAY.getData());
+                        ItemMeta vanishmeta = vanish.getItemMeta();
+                        vanishmeta.setDisplayName(Color.getColor("&a&lVANISH ON"));
+                        ArrayList<String> vanishlore = new ArrayList<>();
+                        vanishlore.add(Color.getColor("&bRight-click to"));
+                        vanishlore.add(Color.getColor("&bDisable the vanish"));
+                        vanishmeta.setLore(vanishlore);
+                        vanish.setItemMeta(vanishmeta);
+                        p.getInventory().setItem(8, vanish);
                         for(Player people : Bukkit.getOnlinePlayers()){
                             people.showPlayer(p);
                         }
                     }else{
-                        invisible_list.add(p);
-                        for(Player people : Bukkit.getOnlinePlayers()){
-                            people.hidePlayer(p);
-                        }
+                        ItemStack vanish = new ItemStack(DyeColor.GRAY.getData());
+                        ItemMeta vanishmeta = vanish.getItemMeta();
+                        vanishmeta.setDisplayName(Color.getColor("&c&lVANISH OFF"));
+                        ArrayList<String> vanishlore = new ArrayList<>();
+                        vanishlore.add(Color.getColor("&bRight-click to"));
+                        vanishlore.add(Color.getColor("&bEnable the vanish"));
+                        vanishmeta.setLore(vanishlore);
+                        vanish.setItemMeta(vanishmeta);
+                        p.getInventory().setItem(8, vanish);
                     }
+                    ItemStack kbtest = new ItemStack(Material.BLAZE_ROD);
+                    ItemMeta kbtestmeta = kbtest.getItemMeta();
+                    kbtestmeta.setDisplayName(Color.getColor("&c&lTEST KB"));
+                    ArrayList<String> kbtestlore = new ArrayList<>();
+                    kbtestlore.add(Color.getColor("&bRight-click to"));
+                    kbtestlore.add(Color.getColor("&bMake a kb test"));
+                    kbtestlore.add(Color.getColor("&bFor damaged player"));
+                    kbtestmeta.setLore(kbtestlore);
+                    kbtest.setItemMeta(kbtestmeta);
                     p.getInventory().setItem(0, randomtp);
-                    p.getInventory().setItem(8, invsee);
+                    p.getInventory().setItem(1, invsee);
+                    p.getInventory().setItem(7, kbtest);
                     p.sendMessage(Color.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.StaffModeon")));
                 }
             }else{

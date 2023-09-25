@@ -23,7 +23,7 @@ public class StaffVanish implements CommandExecutor {
             Player p = (Player) commandSender;
             if (p.hasPermission("staffutilities.staffvanish")) {
                 if(svlist.contains(p)){
-                    svlist.clear();
+                    svlist.remove(p);
                     if(!p.hasPermission("luckperms.log.notify")){
                         User user = LuckPermsProvider.get().getUserManager().getUser(p.getUniqueId());
                         user.data().add(Node.builder("luckperms.log.notify").build());
