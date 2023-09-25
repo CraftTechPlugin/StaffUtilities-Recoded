@@ -1,7 +1,7 @@
 package it.crafttechplugin.staffutilities.Commands;
 
 import it.crafttechplugin.staffutilities.Main;
-import it.crafttechplugin.staffutilities.Utils.Colors;
+import it.crafttechplugin.staffutilities.Utils.Color;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -17,16 +17,16 @@ public class InvSee implements CommandExecutor {
             Player p = (Player) commandSender;
             if(p.hasPermission("staffutilities.invsee")){
                 if(strings.length == 0){
-                    p.sendMessage(Colors.getColor("Insert player"));
+                    p.sendMessage(Color.getColor("Insert player"));
                 }else{
                     Player target = Bukkit.getPlayer(strings[0]);
                     p.openInventory(target.getInventory());
                 }
             }else{
-                commandSender.sendMessage(Colors.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.noPerms")));
+                commandSender.sendMessage(Color.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.noPerms")));
             }
         }else{
-            commandSender.sendMessage(Colors.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.noPerms")));
+            commandSender.sendMessage(Color.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.noPerms")));
         }
         return false;
     }

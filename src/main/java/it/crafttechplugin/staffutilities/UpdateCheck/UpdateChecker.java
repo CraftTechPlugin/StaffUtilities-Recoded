@@ -1,7 +1,7 @@
 package it.crafttechplugin.staffutilities.UpdateCheck;
 
 import it.crafttechplugin.staffutilities.Main;
-import it.crafttechplugin.staffutilities.Utils.Colors;
+import it.crafttechplugin.staffutilities.Utils.Color;
 import org.bukkit.Bukkit;
 
 import java.io.IOException;
@@ -28,7 +28,7 @@ public class UpdateChecker {
                     consumer.accept(scanner.next());
                 }
             } catch (IOException exception){
-                plugin.getLogger().info(Colors.getColor("&cUpdate not found!") + exception.getMessage());
+                plugin.getLogger().info(Color.getColor("&cUpdate not found!") + exception.getMessage());
             }
 
         });

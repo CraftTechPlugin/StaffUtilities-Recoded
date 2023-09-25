@@ -34,3 +34,6 @@ commands:
     aliases:
       - sv
   spy:
+  staffmode:
+    aliases:
+      - sm

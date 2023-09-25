@@ -1,7 +1,7 @@
 package it.crafttechplugin.staffutilities.Commands;
 
 import it.crafttechplugin.staffutilities.Main;
-import it.crafttechplugin.staffutilities.Utils.Colors;
+import it.crafttechplugin.staffutilities.Utils.Color;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -29,7 +29,7 @@ public class Vanish implements CommandExecutor, Listener {
                             people.showPlayer(p);
                         }
                         invisible_list.remove(p);
-                        p.sendMessage(Colors.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.VanishOff")));
+                        p.sendMessage(Color.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.VanishOff")));
                     } else if (!invisible_list.contains(p)) {
                         for (Player people : Bukkit.getOnlinePlayers()) {
                             if (!people.hasPermission("staffutilities.vanish.see")) {
@@ -37,19 +37,19 @@ public class Vanish implements CommandExecutor, Listener {
                             }
                         }
                         invisible_list.add(p);
-                        p.sendMessage(Colors.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.VanishOn")));
+                        p.sendMessage(Color.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.VanishOn")));
                     }
                 } else {
                     Player target = Bukkit.getPlayer(strings[0]);
                     if (target == null) {
-                        p.sendMessage(Colors.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.OfflinePlayer")));
+                        p.sendMessage(Color.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.OfflinePlayer")));
                     } else {
                         if (invisible_list.contains(target)) {
                             for (Player people : Bukkit.getOnlinePlayers()) {
                                 people.showPlayer(target);
                             }
                             invisible_list.remove(target);
-                            target.sendMessage(Colors.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.VanishOff")));
+                            target.sendMessage(Color.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.VanishOff")));
                         } else if (!invisible_list.contains(target)) {
                             for (Player people : Bukkit.getOnlinePlayers()) {
                                 if (!people.hasPermission("staffutilities.vanish.see")) {
@@ -57,15 +57,15 @@ public class Vanish implements CommandExecutor, Listener {
                                 }
                             }
                             invisible_list.add(target);
-                            target.sendMessage(Colors.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.VanishOn")));
+                            target.sendMessage(Color.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.VanishOn")));
                         }
                     }
                 }
             } else {
-                commandSender.sendMessage(Colors.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.noPerms")));
+                commandSender.sendMessage(Color.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.noPerms")));
             }
         } else {
-            commandSender.sendMessage(Colors.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.noPerms")));
+            commandSender.sendMessage(Color.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.noPerms")));
         }
         return true;
     }

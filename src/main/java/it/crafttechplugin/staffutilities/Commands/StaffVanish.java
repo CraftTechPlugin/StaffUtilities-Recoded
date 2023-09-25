@@ -1,6 +1,6 @@
 package it.crafttechplugin.staffutilities.Commands;
 
-import it.crafttechplugin.staffutilities.Utils.Colors;
+import it.crafttechplugin.staffutilities.Utils.Color;
 import me.frep.vulcan.api.VulcanAPI;
 import net.luckperms.api.LuckPermsProvider;
 import net.luckperms.api.model.user.User;
@@ -33,7 +33,7 @@ public class StaffVanish implements CommandExecutor {
                         VulcanAPI.Factory.getApi().toggleAlerts(p);
                     }
                     spylogs.add(p);
-                    p.sendMessage(Colors.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.StaffVanishoff")));
+                    p.sendMessage(Color.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.StaffVanishoff")));
                 }else{
                     svlist.add(p);
                     if(p.hasPermission("luckperms.log.notify")){
@@ -45,10 +45,10 @@ public class StaffVanish implements CommandExecutor {
                         VulcanAPI.Factory.getApi().toggleAlerts(p);
                     }
                     spylogs.remove(p);
-                    p.sendMessage(Colors.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.StaffVanishon")));
+                    p.sendMessage(Color.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.StaffVanishon")));
                 }
             } else {
-                p.sendMessage(Colors.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.noPerms")));
+                p.sendMessage(Color.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.noPerms")));
             }
         } else {
             commandSender.sendMessage("Only players can execute this command");

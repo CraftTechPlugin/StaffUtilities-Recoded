@@ -1,6 +1,6 @@
 package it.crafttechplugin.staffutilities.listeners;
 
-import it.crafttechplugin.staffutilities.Utils.Colors;
+import it.crafttechplugin.staffutilities.Utils.Color;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -16,7 +16,7 @@ public class SpyLogs implements Listener {
         if(e.getMessage().startsWith("/msg") || e.getMessage().startsWith("/w") || e.getMessage().startsWith("/r")){
             for(Player people : Bukkit.getOnlinePlayers()){
                 if(spylogs.contains(people)){
-                    people.sendMessage(Colors.getColor(msg.getString("Messages.SpyPrefix") + e.getMessage()));
+                    people.sendMessage(Color.getColor(msg.getString("Messages.SpyPrefix") + e.getMessage()));
                 }
             }
         }
