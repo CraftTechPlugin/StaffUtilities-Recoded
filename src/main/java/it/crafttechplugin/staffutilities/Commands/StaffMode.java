@@ -1,6 +1,7 @@
 package it.crafttechplugin.staffutilities.Commands;
 
 import it.crafttechplugin.staffutilities.Utils.Color;
+import it.crafttechplugin.staffutilities.Utils.Message;
 import org.bukkit.Bukkit;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
@@ -43,21 +44,8 @@ public class StaffMode implements CommandExecutor {
                     loreinvsee.add(Color.getColor("&bInventory."));
                     randomtpmeta.setLore(loreinvsee);
                     invsee.setItemMeta(invseemeta);
-                    if(!invisible_list.contains(p)){
+                    if(!invisible_list.contains(p)) {
                         invisible_list.add(p);
-                        ItemStack vanish = new ItemStack(DyeColor.GRAY.getData());
-                        ItemMeta vanishmeta = vanish.getItemMeta();
-                        vanishmeta.setDisplayName(Color.getColor("&a&lVANISH ON"));
-                        ArrayList<String> vanishlore = new ArrayList<>();
-                        vanishlore.add(Color.getColor("&bRight-click to"));
-                        vanishlore.add(Color.getColor("&bDisable the vanish"));
-                        vanishmeta.setLore(vanishlore);
-                        vanish.setItemMeta(vanishmeta);
-                        p.getInventory().setItem(8, vanish);
-                        for(Player people : Bukkit.getOnlinePlayers()){
-                            people.showPlayer(p);
-                        }
-                    }else{
                         ItemStack vanish = new ItemStack(DyeColor.RED.getData());
                         ItemMeta vanishmeta = vanish.getItemMeta();
                         vanishmeta.setDisplayName(Color.getColor("&c&lVANISH OFF"));
@@ -67,6 +55,9 @@ public class StaffMode implements CommandExecutor {
                         vanishmeta.setLore(vanishlore);
                         vanish.setItemMeta(vanishmeta);
                         p.getInventory().setItem(8, vanish);
+                        for (Player people : Bukkit.getOnlinePlayers()) {
+                            people.showPlayer(p);
+                        }
                     }
                     ItemStack kbtest = new ItemStack(Material.BLAZE_ROD);
                     ItemMeta kbtestmeta = kbtest.getItemMeta();
@@ -77,10 +68,15 @@ public class StaffMode implements CommandExecutor {
                     kbtestlore.add(Color.getColor("&bFor damaged player"));
                     kbtestmeta.setLore(kbtestlore);
                     kbtest.setItemMeta(kbtestmeta);
+
                     p.getInventory().setItem(0, randomtp);
                     p.getInventory().setItem(1, invsee);
                     p.getInventory().setItem(7, kbtest);
-                    p.sendMessage(Color.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.StaffModeon")));
+                    p.sendMessage(Message.PREFIX.toString() + Message.STAFF_MODE_ON);
+                }else{
+                    p.sendMessage(Message.PREFIX.toString() + Message.STAFF_MODE_OFF);
+                    staffmode_list.remove(p);
+                    p.getInventory().clear();
                 }
             }else{
                 p.sendMessage(Color.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.noPerms")));

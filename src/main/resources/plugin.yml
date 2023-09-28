@@ -37,3 +37,4 @@ commands:
   staffmode:
     aliases:
       - sm
+  randomplayertp:

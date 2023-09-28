@@ -1,6 +1,7 @@
 package it.crafttechplugin.staffutilities;
 
 import it.crafttechplugin.staffutilities.Commands.*;
+import it.crafttechplugin.staffutilities.Commands.Teleport.randomPlayerTp;
 import it.crafttechplugin.staffutilities.Commands.Teleport.tp;
 import it.crafttechplugin.staffutilities.Commands.Teleport.tphere;
 import it.crafttechplugin.staffutilities.UpdateCheck.UpdateChecker;
@@ -102,9 +103,10 @@ public final class Main extends JavaPlugin implements Listener {
         getCommand("msg").setExecutor(new Msg());
         getCommand("staffmode").setExecutor(new StaffMode());
         getCommand("freeze").setExecutor(new Freeze());
-        getCommand("fix").setExecutor(new Fix());
         getCommand("spy").setExecutor(new SpyCommand());
         getCommand("staffvanish").setExecutor(new StaffVanish());
+        getCommand("staffmode").setExecutor(new StaffMode());
+        getCommand("randomplayertp").setExecutor(new randomPlayerTp());
     }
 
     public void listeners() {
@@ -117,6 +119,7 @@ public final class Main extends JavaPlugin implements Listener {
         pm.registerEvents(new JoinMessage(), this);
         pm.registerEvents(new VanishListener(), this);
         pm.registerEvents(new SpyLogs(), this);
+        pm.registerEvents(new StaffListener(), this);
     }
 
     @Override
