@@ -86,7 +86,7 @@
             <artifactId>VulcanAPI</artifactId>
             <version>1.0</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/src/main/java/it/crafttechplugin/staffutilities/Api/VulcanAPI.jar</systemPath>
+            <systemPath>${project.basedir}/src/main/java/it/crafttechplugin/staffutilities/MavenApi/VulcanAPI.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>net.luckperms</groupId>

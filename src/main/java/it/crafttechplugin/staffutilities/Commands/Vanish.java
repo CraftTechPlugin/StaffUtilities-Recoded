@@ -2,6 +2,7 @@ package it.crafttechplugin.staffutilities.Commands;
 
 import it.crafttechplugin.staffutilities.Main;
 import it.crafttechplugin.staffutilities.Utils.Color;
+import it.crafttechplugin.staffutilities.Utils.Message;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -12,6 +13,9 @@ import org.bukkit.event.Listener;
 
 import java.util.ArrayList;
 
+import static it.crafttechplugin.staffutilities.customApi.vanishApi.disableVanish;
+import static it.crafttechplugin.staffutilities.customApi.vanishApi.enableVanish;
+
 public class Vanish implements CommandExecutor, Listener {
 
 
@@ -19,53 +23,32 @@ public class Vanish implements CommandExecutor, Listener {
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
-        FileConfiguration msg = Main.msg;
         if (commandSender instanceof Player) {
             Player p = (Player) commandSender;
             if (p.hasPermission("staffutilities.vanish.use")) {
                 if (strings.length == 0) {
                     if (invisible_list.contains(p)) {
-                        for (Player people : Bukkit.getOnlinePlayers()) {
-                            people.showPlayer(p);
-                        }
-                        invisible_list.remove(p);
-                        p.sendMessage(Color.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.VanishOff")));
+                        enableVanish(p);
                     } else if (!invisible_list.contains(p)) {
-                        for (Player people : Bukkit.getOnlinePlayers()) {
-                            if (!people.hasPermission("staffutilities.vanish.see")) {
-                                people.hidePlayer(p);
-                            }
-                        }
-                        invisible_list.add(p);
-                        p.sendMessage(Color.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.VanishOn")));
+                        disableVanish(p);
                     }
                 } else {
                     Player target = Bukkit.getPlayer(strings[0]);
                     if (target == null) {
-                        p.sendMessage(Color.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.OfflinePlayer")));
+                        p.sendMessage(Message.PREFIX.toString() + Message.OFFLINE_PLAYER);
                     } else {
                         if (invisible_list.contains(target)) {
-                            for (Player people : Bukkit.getOnlinePlayers()) {
-                                people.showPlayer(target);
-                            }
-                            invisible_list.remove(target);
-                            target.sendMessage(Color.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.VanishOff")));
+                            disableVanish(target);
                         } else if (!invisible_list.contains(target)) {
-                            for (Player people : Bukkit.getOnlinePlayers()) {
-                                if (!people.hasPermission("staffutilities.vanish.see")) {
-                                    people.hidePlayer(target);
-                                }
-                            }
-                            invisible_list.add(target);
-                            target.sendMessage(Color.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.VanishOn")));
+                            enableVanish(p);
                         }
                     }
                 }
             } else {
-                commandSender.sendMessage(Color.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.noPerms")));
+                p.sendMessage(Message.PREFIX.toString() + Message.NO_PERMS);
             }
         } else {
-            commandSender.sendMessage(Color.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.noPerms")));
+            commandSender.sendMessage(Message.PREFIX.toString() + Message.NO_PERMS);
         }
         return true;
     }

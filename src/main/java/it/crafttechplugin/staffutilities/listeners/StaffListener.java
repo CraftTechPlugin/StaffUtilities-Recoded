@@ -1,6 +1,7 @@
 package it.crafttechplugin.staffutilities.listeners;
 
 import it.crafttechplugin.staffutilities.Utils.Color;
+import it.crafttechplugin.staffutilities.Utils.Message;
 import org.bukkit.Bukkit;
 import org.bukkit.DyeColor;
 import org.bukkit.entity.Player;
@@ -15,9 +16,14 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 import static it.crafttechplugin.staffutilities.Commands.StaffMode.staffmode_list;
-import static it.crafttechplugin.staffutilities.customApi.inventories.inventoryApi.setPlayerInventoryItem;
+import static it.crafttechplugin.staffutilities.customApi.inventoryApi.getDisplayName;
+import static it.crafttechplugin.staffutilities.customApi.inventoryApi.setPlayerInventoryItem;
+import static it.crafttechplugin.staffutilities.customApi.vanishApi.disableVanish;
+import static it.crafttechplugin.staffutilities.customApi.vanishApi.enableVanish;
 
 public class StaffListener implements Listener {
 
@@ -33,10 +39,21 @@ public class StaffListener implements Listener {
     @EventHandler
     public void onInteract2(PlayerInteractEvent e){
         Player p = e.getPlayer();
-        if(e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase(Color.getColor("&e&lRANDOM TP"))) {
-            Bukkit.dispatchCommand((Player)p, "randomplayertp");
+        String randomTP = "&e&lRANDOM TP";
+        String vanishon = "&a&lVANISH ON";
+        String vanishoff = "&c&lVANISH OFF";
+        if(getDisplayName(randomTP)) {
+            Random random = new Random();
+            List<Player> onlinePlayers = new ArrayList<>(Bukkit.getOnlinePlayers());
+            onlinePlayers.remove(p);
+            if(onlinePlayers.isEmpty()){
+                p.sendMessage(Message.PREFIX.toString() + Message.OFFLINE_PLAYER);
+            }
+            int randomIndex = random.nextInt(onlinePlayers.size());
+            Player target = onlinePlayers.get(randomIndex);
+            p.teleport(target.getLocation());
 
-        }else if(e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase(Color.getColor("&a&lVANISH ON"))){
+        }else if(getDisplayName(vanishon)){
             ItemStack vanish = new ItemStack(DyeColor.RED.getData());
             ItemMeta vanishmeta = vanish.getItemMeta();
             vanishmeta.setDisplayName(Color.getColor("&c&lVANISH OFF"));
@@ -46,11 +63,9 @@ public class StaffListener implements Listener {
             vanishmeta.setLore(vanishlore);
             vanish.setItemMeta(vanishmeta);
             setPlayerInventoryItem(p, 8, vanish);
-            for(Player onlinePlayers : Bukkit.getOnlinePlayers()){
-                onlinePlayers.showPlayer(p);
-            }
+            disableVanish(p);
 
-        }else if(e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase(Color.getColor("&c&lVANISH OFF"))){
+        }else if(getDisplayName(vanishoff)){
             ItemStack vanish = new ItemStack(DyeColor.GRAY.getData());
             ItemMeta vanishmeta = vanish.getItemMeta();
             vanishmeta.setDisplayName(Color.getColor("&a&lVANISH ON"));
@@ -60,20 +75,16 @@ public class StaffListener implements Listener {
             vanishmeta.setLore(vanishlore);
             vanish.setItemMeta(vanishmeta);
             setPlayerInventoryItem(p, 8, vanish);
-            for(Player people : Bukkit.getOnlinePlayers()){
-                if(!people.hasPermission("staffutilities.vanish.see")){
-                    people.hidePlayer(p);
-                }
-            }
-
+            enableVanish(p);
         }
     }
 
     @EventHandler
     public void onDamage(EntityDamageByEntityEvent e){
+        String kbtest = "&c&lTEST KB";
         Player p = (Player) e.getDamager();
         if(staffmode_list.contains(p)){
-            if(!p.getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase(Color.getColor("&c&lTEST KB"))){
+            if(!getDisplayName(kbtest)){
                 e.setCancelled(true);
             }
         }
