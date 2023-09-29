@@ -1,62 +1,34 @@
 package it.crafttechplugin.staffutilities.Commands;
 
-import it.crafttechplugin.staffutilities.Main;
-import it.crafttechplugin.staffutilities.Utils.Color;
-import org.bukkit.ChatColor;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.file.FileConfiguration;
+import it.crafttechplugin.staffutilities.Utils.Message;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.PluginManager;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 
-import static org.bukkit.Bukkit.getServer;
+public class PLHider implements Listener {
 
-public class PLHider implements CommandExecutor {
-    @Override
-    public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
-        FileConfiguration msg = Main.msg;
-        if (commandSender instanceof Player) {
-            Player p = (Player) commandSender;
-            PluginManager pm = getServer().getPluginManager();
-            if(p.hasPermission("staffutilities.plhider")) {
-                String placeholderPlugins = Main.plugin.getConfig().getString("Messages.PLHiderOff");
-                p.sendMessage(Color.getColor(placeholderPlugins));
-
-                for (Plugin plugins : pm.getPlugins()) {
-                    ChatColor color;
-
-                    // Verifica se il plugin è abilitato
-                    if (Main.plugin.isEnabled()) {
-                        color = ChatColor.AQUA;
-                    } else {
-                        color = ChatColor.RED;
+    @EventHandler
+    public void onCommand(PlayerCommandPreprocessEvent event){
+        if(event.getMessage().startsWith("/pl") ||
+           event.getMessage().startsWith("/bukkit:pl") ||
+           event.getMessage().startsWith("/about") ||
+           event.getMessage().startsWith("/plugins") ||
+           event.getMessage().startsWith("/bukkit:plugins")){
+            for(Player onlinePlayers : Bukkit.getOnlinePlayers()){
+                if(!event.getPlayer().hasPermission("staffutilities.bypass.pl-hider")){
+                    event.setCancelled(true);
+                }else{
+                    if(onlinePlayers.hasPermission("staffutilities.pl-hider.notify")){
+                        if(!event.getPlayer().hasPermission("staffutilities.bypass.pl-hider")){
+                            onlinePlayers.sendMessage(Message.PREFIX + Message.PL_HIDER.toString()
+                                    .replaceAll("%player%", event.getPlayer().getName()));
+                        }
                     }
-                    p.sendMessage(color + plugins.getName());
                 }
-            } else {
-                p.sendMessage(Color.getColor(Main.plugin.getConfig().getString("Messages.PLHider")));
-            }
-        } else {
-            PluginManager pm = getServer().getPluginManager();
-            String placeholderPlugins = Main.plugin.getConfig().getString("Messages.PLHiderOff");
-            commandSender.sendMessage(Color.getColor(placeholderPlugins));
-
-            for (Plugin plugins : pm.getPlugins()) {
-                ChatColor color;
-
-                // Verifica se il plugin è abilitato
-                if (Main.plugin.isEnabled()) {
-                    color = ChatColor.AQUA;
-                } else {
-                    color = ChatColor.RED;
-                }
-                commandSender.sendMessage(color + plugins.getName());
             }
         }
-        return false;
     }
-
 
 }

@@ -13,11 +13,9 @@ public class SpyLogs implements Listener {
 
     @EventHandler
     public void onmsg(PlayerCommandPreprocessEvent e){
-        if(e.getMessage().startsWith("/msg") || e.getMessage().startsWith("/w") || e.getMessage().startsWith("/r")){
-            for(Player people : Bukkit.getOnlinePlayers()){
-                if(spylogs.contains(people)){
-                    people.sendMessage(Color.getColor(msg.getString("Messages.SpyPrefix") + e.getMessage()));
-                }
+        for(Player people : Bukkit.getOnlinePlayers()){
+            if(spylogs.contains(people)) {
+                people.sendMessage(Color.getColor(msg.getString("Messages.SpyPrefix") + e.getMessage()));
             }
         }
     }

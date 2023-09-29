@@ -9,7 +9,6 @@ public enum Message {
     NO_PERMS(Main.msg.getString("Messages.noPerms")),
     JOIN_MESSAGE(Main.msg.getString("Messages.JoinMessage")),
     PL_HIDER(Main.msg.getString("Messages.PLHider")),
-    PL_HIDER_OFF(Main.msg.getString("Messages.PLHiderOff")),
     FLY_OFF(Main.msg.getString("Messages.FlyOff")),
     FLY_ON(Main.msg.getString("Messages.FlyOn")),
     GMC_OFF(Main.msg.getString("Messages.GmcOff")),

@@ -42,7 +42,7 @@ public class StaffListener implements Listener {
         String randomTP = "&e&lRANDOM TP";
         String vanishon = "&a&lVANISH ON";
         String vanishoff = "&c&lVANISH OFF";
-        if(getDisplayName(randomTP)) {
+        if(e.getPlayer().getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase(randomTP)){
             Random random = new Random();
             List<Player> onlinePlayers = new ArrayList<>(Bukkit.getOnlinePlayers());
             onlinePlayers.remove(p);
@@ -53,7 +53,7 @@ public class StaffListener implements Listener {
             Player target = onlinePlayers.get(randomIndex);
             p.teleport(target.getLocation());
 
-        }else if(getDisplayName(vanishon)){
+        }else if(e.getPlayer().getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase(vanishon)){
             ItemStack vanish = new ItemStack(DyeColor.RED.getData());
             ItemMeta vanishmeta = vanish.getItemMeta();
             vanishmeta.setDisplayName(Color.getColor("&c&lVANISH OFF"));
@@ -65,7 +65,7 @@ public class StaffListener implements Listener {
             setPlayerInventoryItem(p, 8, vanish);
             disableVanish(p);
 
-        }else if(getDisplayName(vanishoff)){
+        }else if(e.getPlayer().getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase(vanishoff)){
             ItemStack vanish = new ItemStack(DyeColor.GRAY.getData());
             ItemMeta vanishmeta = vanish.getItemMeta();
             vanishmeta.setDisplayName(Color.getColor("&a&lVANISH ON"));
