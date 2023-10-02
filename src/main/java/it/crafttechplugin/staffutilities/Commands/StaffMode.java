@@ -14,17 +14,15 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 
-import static it.crafttechplugin.staffutilities.Commands.Vanish.invisible_list;
-import static it.crafttechplugin.staffutilities.Main.msg;
-
 public class StaffMode implements CommandExecutor {
     public static ArrayList<Player> staffmode_list = new ArrayList<>();
-    @Override
+
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
-        if(commandSender instanceof Player){
-            Player p = (Player) commandSender;
-            if(p.hasPermission("staffutilities.staffmode")){
-                if(!staffmode_list.contains(p)){
+        if (commandSender instanceof Player) {
+            Player p = (Player)commandSender;
+            if (p.hasPermission("staffutilities.staffmode")) {
+                if (!staffmode_list.contains(p)) {
+                    p.setAllowFlight(true);
                     ItemStack randomtp = new ItemStack(Material.COMPASS);
                     ItemMeta randomtpmeta = randomtp.getItemMeta();
                     randomtpmeta.setDisplayName(Color.getColor("&e&lRANDOM TELEPORT"));
@@ -34,7 +32,6 @@ public class StaffMode implements CommandExecutor {
                     lore.add(Color.getColor("&bRandom player."));
                     randomtpmeta.setLore(lore);
                     randomtp.setItemMeta(randomtpmeta);
-
                     ItemStack invsee = new ItemStack(Material.BOOK);
                     ItemMeta invseemeta = invsee.getItemMeta();
                     invseemeta.setDisplayName(Color.getColor("&b&lINVSEE"));
@@ -44,8 +41,8 @@ public class StaffMode implements CommandExecutor {
                     loreinvsee.add(Color.getColor("&bInventory."));
                     randomtpmeta.setLore(loreinvsee);
                     invsee.setItemMeta(invseemeta);
-                    if(!invisible_list.contains(p)) {
-                        invisible_list.add(p);
+                    if (!Vanish.invisible_list.contains(p)) {
+                        Vanish.invisible_list.add(p);
                         ItemStack vanish = new ItemStack(DyeColor.RED.getData());
                         ItemMeta vanishmeta = vanish.getItemMeta();
                         vanishmeta.setDisplayName(Color.getColor("&c&lVANISH OFF"));
@@ -55,9 +52,8 @@ public class StaffMode implements CommandExecutor {
                         vanishmeta.setLore(vanishlore);
                         vanish.setItemMeta(vanishmeta);
                         p.getInventory().setItem(8, vanish);
-                        for (Player people : Bukkit.getOnlinePlayers()) {
+                        for (Player people : Bukkit.getOnlinePlayers())
                             people.showPlayer(p);
-                        }
                     }
                     ItemStack kbtest = new ItemStack(Material.BLAZE_ROD);
                     ItemMeta kbtestmeta = kbtest.getItemMeta();
@@ -68,21 +64,20 @@ public class StaffMode implements CommandExecutor {
                     kbtestlore.add(Color.getColor("&bFor damaged player"));
                     kbtestmeta.setLore(kbtestlore);
                     kbtest.setItemMeta(kbtestmeta);
-
                     p.getInventory().setItem(0, randomtp);
                     p.getInventory().setItem(1, invsee);
                     p.getInventory().setItem(7, kbtest);
-                    p.sendMessage(Message.PREFIX.toString() + Message.STAFF_MODE_ON);
-                }else{
-                    p.sendMessage(Message.PREFIX.toString() + Message.STAFF_MODE_OFF);
+                    p.sendMessage(Message.STAFF_MODE_ON.toString());
+                } else {
+                    p.sendMessage(Message.STAFF_MODE_OFF.toString());
                     staffmode_list.remove(p);
                     p.getInventory().clear();
                 }
-            }else{
-                p.sendMessage(Color.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.noPerms")));
+            } else {
+                p.sendMessage(Message.NO_PERMS.toString());
             }
-        }else{
-            commandSender.sendMessage(Color.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.noPerms")));
+        } else {
+            commandSender.sendMessage(Message.NO_PERMS.toString());
         }
         return false;
     }

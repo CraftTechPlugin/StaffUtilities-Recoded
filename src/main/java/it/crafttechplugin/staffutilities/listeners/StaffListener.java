@@ -1,8 +1,7 @@
 package it.crafttechplugin.staffutilities.listeners;
 
 import it.crafttechplugin.staffutilities.Utils.Color;
-import it.crafttechplugin.staffutilities.Utils.Message;
-import org.bukkit.Bukkit;
+import it.crafttechplugin.staffutilities.customApi.randomTpApi;
 import org.bukkit.DyeColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -12,6 +11,7 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -22,6 +22,7 @@ import java.util.Random;
 import static it.crafttechplugin.staffutilities.Commands.StaffMode.staffmode_list;
 import static it.crafttechplugin.staffutilities.customApi.inventoryApi.getDisplayName;
 import static it.crafttechplugin.staffutilities.customApi.inventoryApi.setPlayerInventoryItem;
+import static it.crafttechplugin.staffutilities.customApi.randomTpApi.randomtp;
 import static it.crafttechplugin.staffutilities.customApi.vanishApi.disableVanish;
 import static it.crafttechplugin.staffutilities.customApi.vanishApi.enableVanish;
 
@@ -32,26 +33,19 @@ public class StaffListener implements Listener {
         if(e.getPlayer().getInventory().getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase(Color.getColor("&b&lINVSEE"))){
             Player p = e.getPlayer();
             Player target = (Player) e.getRightClicked();
-            p.openInventory(target.getInventory());
+            Inventory targetInventory = target.getInventory();
+            p.openInventory(targetInventory);
         }
     }
 
     @EventHandler
     public void onInteract2(PlayerInteractEvent e){
         Player p = e.getPlayer();
-        String randomTP = "&e&lRANDOM TP";
-        String vanishon = "&a&lVANISH ON";
-        String vanishoff = "&c&lVANISH OFF";
-        if(e.getPlayer().getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase(randomTP)){
-            Random random = new Random();
-            List<Player> onlinePlayers = new ArrayList<>(Bukkit.getOnlinePlayers());
-            onlinePlayers.remove(p);
-            if(onlinePlayers.isEmpty()){
-                p.sendMessage(Message.PREFIX.toString() + Message.OFFLINE_PLAYER);
-            }
-            int randomIndex = random.nextInt(onlinePlayers.size());
-            Player target = onlinePlayers.get(randomIndex);
-            p.teleport(target.getLocation());
+        String randomTP = "§e§lRANDOM TP";
+        String vanishon = "§a§lVANISH ON";
+        String vanishoff = "§c§lVANISH OFF";
+        if(e.getPlayer().getItemInHand().getItemMeta().getDisplayName() == randomTP){
+            randomtp(p);
 
         }else if(e.getPlayer().getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase(vanishon)){
             ItemStack vanish = new ItemStack(DyeColor.RED.getData());
@@ -62,7 +56,7 @@ public class StaffListener implements Listener {
             vanishlore.add(Color.getColor("&bEnable the vanish"));
             vanishmeta.setLore(vanishlore);
             vanish.setItemMeta(vanishmeta);
-            setPlayerInventoryItem(p, 8, vanish);
+            p.getInventory().setItem(8, vanish);
             disableVanish(p);
 
         }else if(e.getPlayer().getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase(vanishoff)){
@@ -74,19 +68,16 @@ public class StaffListener implements Listener {
             vanishlore.add(Color.getColor("&bDisable the vanish"));
             vanishmeta.setLore(vanishlore);
             vanish.setItemMeta(vanishmeta);
-            setPlayerInventoryItem(p, 8, vanish);
+            p.getInventory().setItem(8, vanish);
             enableVanish(p);
         }
     }
 
     @EventHandler
     public void onDamage(EntityDamageByEntityEvent e){
-        String kbtest = "&c&lTEST KB";
         Player p = (Player) e.getDamager();
         if(staffmode_list.contains(p)){
-            if(!getDisplayName(kbtest)){
-                e.setCancelled(true);
-            }
+            e.setCancelled(true);
         }
     }
 

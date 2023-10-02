@@ -1,9 +1,9 @@
 package it.crafttechplugin.staffutilities;
 
 import it.crafttechplugin.staffutilities.Commands.*;
-import it.crafttechplugin.staffutilities.Commands.Teleport.randomPlayerTp;
 import it.crafttechplugin.staffutilities.Commands.Teleport.tp;
 import it.crafttechplugin.staffutilities.Commands.Teleport.tphere;
+import it.crafttechplugin.staffutilities.Debug.RandomDebug;
 import it.crafttechplugin.staffutilities.UpdateCheck.UpdateChecker;
 import it.crafttechplugin.staffutilities.Utils.Color;
 import it.crafttechplugin.staffutilities.bans.BanManager;
@@ -28,6 +28,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
+
+import static org.bukkit.Bukkit.getPluginManager;
 
 @SuppressWarnings("all")
 public final class Main extends JavaPlugin implements Listener {
@@ -98,7 +100,6 @@ public final class Main extends JavaPlugin implements Listener {
         getCommand("tp").setExecutor(new tp());
         getCommand("tphere").setExecutor(new tphere());
         getCommand("staffutilities").setExecutor(new StaffUtilitiesCommand(this));
-        getCommand("startevent").setExecutor(new StartEvent());
         getCommand("vanish").setExecutor(new Vanish());
         getCommand("msg").setExecutor(new Msg());
         getCommand("staffmode").setExecutor(new StaffMode());
@@ -106,11 +107,11 @@ public final class Main extends JavaPlugin implements Listener {
         getCommand("spy").setExecutor(new SpyCommand());
         getCommand("staffvanish").setExecutor(new StaffVanish());
         getCommand("staffmode").setExecutor(new StaffMode());
-        getCommand("randomplayertp").setExecutor(new randomPlayerTp());
+        getCommand("randomtp").setExecutor(new RandomDebug());
     }
 
     public void listeners() {
-        PluginManager pm = Bukkit.getPluginManager();
+        PluginManager pm = getPluginManager();
 
         pm.registerEvents(new PlayerChat(), this);
         pm.registerEvents(new PlayerJoin(), this);

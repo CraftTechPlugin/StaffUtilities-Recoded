@@ -27,9 +27,8 @@ join-message: true #default (true)
 #enable/disable fly when a player join
 join-fly: true #default (true)
 
-#
-start-event:
-  enabled: true #default (true)
-
 #toggle moderation commands (ban, mute, tempban, tempmute, kick, lock, unlock)
 moderation-feature: true #default (true)
+
+#set default gamemode on join
+gamemode-on-join: survival #default (survival)

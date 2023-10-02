@@ -2,6 +2,7 @@ package it.crafttechplugin.staffutilities.listeners;
 
 import it.crafttechplugin.staffutilities.Main;
 import it.crafttechplugin.staffutilities.Utils.Color;
+import it.crafttechplugin.staffutilities.Utils.Message;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.GameMode;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -16,17 +17,27 @@ public class Events implements Listener {
 
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
-        FileConfiguration msg = Main.msg;
+        String getGameMode = Main.getInstance().getConfig().getString("gamemode-on-join");
         Player p = e.getPlayer();
-        p.setGameMode(GameMode.SURVIVAL);
         e.setJoinMessage(null);
+        if(getGameMode == "survival"){
+            p.setGameMode(GameMode.SURVIVAL);
+        } else if(getGameMode == "creative") {
+            p.setGameMode(GameMode.CREATIVE);
+        } else if (getGameMode == "spectator") {
+            p.setGameMode(GameMode.SPECTATOR);
+        } else if (getGameMode == "adventure") {
+            p.setGameMode(GameMode.ADVENTURE);
+        }
+
+        //Join Message & Fly
         if (Main.getInstance().getConfig().getBoolean("join-message.Enabled")) {
-            String Senza = Color.getColor(Main.getInstance().getConfig().getString("Messages.JoinMessage.Message")).replaceAll("%player%", p.getName());
+            String Senza = Color.getColor(Message.JOIN_MESSAGE.toString()).replaceAll("%player%", p.getName());
             String Con = PlaceholderAPI.setPlaceholders(p, Senza);
             e.setJoinMessage(Color.getColor(Con));
-        }else if(p.hasPermission("staffutilities.fly")){
-            if(Main.getInstance().getConfig().getBoolean("join-fly")){
-                p.setAllowFlight(true);
+        }else if(p.hasPermission("staffutilities.fly")) {
+            if (Main.getInstance().getConfig().getBoolean("join-fly")) {
+                p.setFlying(true);
             }
         }
     }

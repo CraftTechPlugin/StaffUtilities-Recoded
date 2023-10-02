@@ -22,7 +22,7 @@ public class PLHider implements Listener {
                 }else{
                     if(onlinePlayers.hasPermission("staffutilities.pl-hider.notify")){
                         if(!event.getPlayer().hasPermission("staffutilities.bypass.pl-hider")){
-                            onlinePlayers.sendMessage(Message.PREFIX + Message.PL_HIDER.toString()
+                            onlinePlayers.sendMessage(Message.PL_HIDER.toString()
                                     .replaceAll("%player%", event.getPlayer().getName()));
                         }
                     }
