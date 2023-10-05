@@ -1,6 +1,7 @@
 package it.crafttechplugin.staffutilities.Commands;
 
 import it.crafttechplugin.staffutilities.Utils.Color;
+import it.crafttechplugin.staffutilities.Utils.Message;
 import me.frep.vulcan.api.VulcanAPI;
 import net.luckperms.api.LuckPermsProvider;
 import net.luckperms.api.model.user.User;
@@ -18,9 +19,9 @@ import static it.crafttechplugin.staffutilities.Main.msg;
 public class StaffVanish implements CommandExecutor {
     public static ArrayList<Player> svlist = new ArrayList<>();
     @Override
-    public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
-        if (commandSender instanceof Player) {
-            Player p = (Player) commandSender;
+    public boolean onCommand(CommandSender sender, Command command, String s, String[] strings) {
+        if (sender instanceof Player) {
+            Player p = (Player) sender;
             if (p.hasPermission("staffutilities.staffvanish")) {
                 if(svlist.contains(p)){
                     svlist.remove(p);
@@ -33,7 +34,7 @@ public class StaffVanish implements CommandExecutor {
                         VulcanAPI.Factory.getApi().toggleAlerts(p);
                     }
                     spylogs.add(p);
-                    p.sendMessage(Color.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.StaffVanishoff")));
+                    p.sendMessage(Message.STAFF_MODE_OFF.toString());
                 }else{
                     svlist.add(p);
                     if(p.hasPermission("luckperms.log.notify")){
@@ -45,13 +46,13 @@ public class StaffVanish implements CommandExecutor {
                         VulcanAPI.Factory.getApi().toggleAlerts(p);
                     }
                     spylogs.remove(p);
-                    p.sendMessage(Color.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.StaffVanishon")));
+                    p.sendMessage(Message.STAFF_VANISH_ON.toString());
                 }
             } else {
-                p.sendMessage(Color.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.noPerms")));
+                p.sendMessage(Message.NO_PERMS.toString());
             }
         } else {
-            commandSender.sendMessage("Only players can execute this command");
+            sender.sendMessage(Message.NO_PERMS.toString());
         }
         return false;
     }

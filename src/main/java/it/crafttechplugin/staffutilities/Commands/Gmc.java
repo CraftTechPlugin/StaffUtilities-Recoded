@@ -2,6 +2,7 @@ package it.crafttechplugin.staffutilities.Commands;
 
 import it.crafttechplugin.staffutilities.Main;
 import it.crafttechplugin.staffutilities.Utils.Color;
+import it.crafttechplugin.staffutilities.Utils.Message;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.command.Command;
@@ -13,41 +14,38 @@ import org.bukkit.entity.Player;
 public class Gmc implements CommandExecutor {
 
     @Override
-    public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
-        FileConfiguration msg = Main.msg;
-        if (commandSender instanceof Player) {
-            Player p = (Player) commandSender;
+    public boolean onCommand(CommandSender sender, Command command, String s, String[] strings) {
+        if (sender instanceof Player) {
+            Player p = (Player) sender;
             if (p.hasPermission("staffutilities.gmc")) {
                 if (strings.length == 0){
                     if (p.getGameMode() == GameMode.CREATIVE) {
                         p.setGameMode(GameMode.SURVIVAL);
-                        p.sendMessage(Color.getColor(msg.getString("Messages.Prefix")+ msg.getString("Messages.GmcOff")));
-                    }
-                    else if (p.getGameMode() == GameMode.SURVIVAL) {
+                        p.sendMessage(Message.GMC_OFF.toString());
+                    }else if (p.getGameMode() == GameMode.SURVIVAL) {
                         p.setGameMode(GameMode.CREATIVE);
-                        p.sendMessage(Color.getColor(msg.getString("Messages.Prefix")+ msg.getString("Messages.GmcOn")));
+                        p.sendMessage(Message.GMC_ON.toString());
                     }
-
                 }else {
                     Player t = Bukkit.getPlayer(strings[0]);
                     if (t==null){
-                        p.sendMessage(Color.getColor(msg.getString("Messages.Prefix") + msg.getString("OfflinePlayer")));
+                        p.sendMessage(Message.OFFLINE_PLAYER.toString());
                     }else{
                         if (t.getGameMode() == GameMode.CREATIVE) {
                             t.setGameMode(GameMode.SURVIVAL);
-                            t.sendMessage(Color.getColor(msg.getString("Messages.Prefix")+ msg.getString("Messages.GmcOff")));
+                            t.sendMessage(Message.GMC_OFF.toString());
                         }
                         else if (t.getGameMode() == GameMode.SURVIVAL) {
                             t.setGameMode(GameMode.CREATIVE);
-                            t.sendMessage(Color.getColor(msg.getString("Messages.Prefix")+ msg.getString("Messages.GmcOn")));
+                            t.sendMessage(Message.GMC_ON.toString());
                         }
                     }
                 }
             }else{
-                commandSender.sendMessage(Color.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.noPerms")));
+                p.sendMessage(Message.NO_PERMS.toString());
             }
         }else{
-            commandSender.sendMessage(Color.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.noPerms")));
+            sender.sendMessage(Message.NO_PERMS.toString());
         }
         return false;
     }

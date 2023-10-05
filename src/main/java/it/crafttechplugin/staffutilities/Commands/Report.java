@@ -2,6 +2,7 @@ package it.crafttechplugin.staffutilities.Commands;
 
 import it.crafttechplugin.staffutilities.Main;
 import it.crafttechplugin.staffutilities.Utils.Color;
+import it.crafttechplugin.staffutilities.Utils.Message;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -12,10 +13,9 @@ import org.bukkit.entity.Player;
 
 public class Report implements CommandExecutor {
     @Override
-    public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
-        FileConfiguration msg = Main.msg;
-        if(commandSender instanceof Player){
-            Player p = (Player) commandSender;
+    public boolean onCommand(CommandSender sender, Command command, String s, String[] strings) {
+        if(sender instanceof Player){
+            Player p = (Player) sender;
             if(p.hasPermission("staffutlitities.report.use")){
                 String sm = "";
                 for(int i = 1; i < strings.length;i++) {
@@ -23,32 +23,32 @@ public class Report implements CommandExecutor {
                     sm = (sm + arg);
                 }
                 if(strings[0].length() == 0){
-                    p.sendMessage(Color.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.noArgs")));
+                    p.sendMessage(Message.NO_ARGS.toString());
                 }else{
                     Player target = Bukkit.getPlayer(strings[0]);
-                    if(!target.isOnline()){
-                        p.sendMessage(Color.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.OfflinePlayer")));
+                    if(target == null){
+                        p.sendMessage(Message.OFFLINE_PLAYER.toString());
                     }else{
                         if(strings[1].length() == 0){
-                            p.sendMessage(Color.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.noArgs")));
+                            p.sendMessage(Message.NO_ARGS.toString());
                         }else if(strings[1] == s){
-                            p.sendMessage(Color.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.ReportSuccess")));
+                            p.sendMessage(Message.REPORT_SUCCESS.toString());
                             for(Player people : Bukkit.getOnlinePlayers()){
                                 if(people.hasPermission("staffutilies.report.see")){
-                                    String without = Color.getColor(msg.getString("Messages.ReportReceived"))
+                                    String without = Message.REPORT_RECEIVED.toString()
                                             .replaceAll("%target%", target.getName());
                                     String with = PlaceholderAPI.setPlaceholders(target, without);
-                                    people.sendMessage(Color.getColor(msg.getString("Messages.Prefix")+with));
+                                    people.sendMessage(with);
                                 }
                             }
                         }
                     }
                 }
             }else{
-                commandSender.sendMessage(Color.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.noPerms")));
+                p.sendMessage(Message.NO_PERMS.toString());
             }
         }else{
-            commandSender.sendMessage("Only players can execute this command");
+            sender.sendMessage(Message.NO_PERMS.toString());
         }
         return false;
     }

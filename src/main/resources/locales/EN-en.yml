@@ -41,3 +41,5 @@ Messages:
   SpyPrefix: "&b&lSPY &7» "
   StaffModeon: "&eStaffMode &aenabled"
   StaffModeoff: "&eStaffMode &cdisabled"
+  CalculatorSucces: "&eThe result is %result%"
+  CalculatorError: "&eThe result is &cimpossible"

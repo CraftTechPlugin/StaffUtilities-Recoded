@@ -2,6 +2,7 @@ package it.crafttechplugin.staffutilities.Commands;
 
 import it.crafttechplugin.staffutilities.Main;
 import it.crafttechplugin.staffutilities.Utils.Color;
+import it.crafttechplugin.staffutilities.Utils.Message;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -17,11 +18,10 @@ public class StaffUtilitiesCommand implements CommandExecutor {
     }
 
     @Override
-    public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
-        FileConfiguration msg = Main.msg;
+    public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
         if (args.length == 0) {
-            if(commandSender instanceof Player){
-                Player p = (Player) commandSender;
+            if(sender instanceof Player){
+                Player p = (Player) sender;
                 p.sendMessage(Color.getColor("&b&lSTAFFUTILITIES by CraftTechPlugin"));
                 if( p.hasPermission("staffutilities.help")){
                     p.sendMessage("");
@@ -40,13 +40,13 @@ public class StaffUtilitiesCommand implements CommandExecutor {
                     p.sendMessage(Color.getColor("&b/staffvanish &7(Toggle staffvanish)"));
                 }
             }else{
-                commandSender.sendMessage(Color.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.noPerms")));
+                sender.sendMessage(Message.NO_PERMS.toSpy());
             }
         }
         if (args.length == 1) {
             if (args[0].equalsIgnoreCase("help")) {
-                if(commandSender instanceof Player){
-                    Player p = (Player) commandSender;
+                if(sender instanceof Player){
+                    Player p = (Player) sender;
                     p.sendMessage(Color.getColor("&b&lSTAFFUTILITIES by CraftTechPlugin"));
                     if( p.hasPermission("staffutilities.help")){
                         p.sendMessage("");
@@ -65,16 +65,16 @@ public class StaffUtilitiesCommand implements CommandExecutor {
                         p.sendMessage(Color.getColor("&b/staffvanish &7(Toggle staffvanish)"));
                     }
                 }else{
-                    commandSender.sendMessage(Color.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.noPerms")));
+                    sender.sendMessage(Message.NO_PERMS.toString());
                 }
             }
             if (args[0].equalsIgnoreCase("reload")) {
-                if (commandSender instanceof Player) {
-                    if (commandSender.hasPermission("staffutilities.reload")){
+                if (sender instanceof Player) {
+                    if (sender.hasPermission("staffutilities.reload")){
                         plugin.getServer().getScheduler().cancelTasks(plugin);
                         plugin.reloadConfig();
                         plugin.createFiles();
-                        commandSender.sendMessage(Color.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.reload")));
+                        sender.sendMessage(Message.RELOAD.toString());
                     }
                 }
             }

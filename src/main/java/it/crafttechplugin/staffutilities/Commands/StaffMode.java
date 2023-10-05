@@ -17,9 +17,9 @@ import java.util.ArrayList;
 public class StaffMode implements CommandExecutor {
     public static ArrayList<Player> staffmode_list = new ArrayList<>();
 
-    public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
-        if (commandSender instanceof Player) {
-            Player p = (Player)commandSender;
+    public boolean onCommand(CommandSender sender, Command command, String s, String[] strings) {
+        if (sender instanceof Player) {
+            Player p = (Player)sender;
             if (p.hasPermission("staffutilities.staffmode")) {
                 if (!staffmode_list.contains(p)) {
                     p.setAllowFlight(true);
@@ -77,7 +77,7 @@ public class StaffMode implements CommandExecutor {
                 p.sendMessage(Message.NO_PERMS.toString());
             }
         } else {
-            commandSender.sendMessage(Message.NO_PERMS.toString());
+            sender.sendMessage(Message.NO_PERMS.toString());
         }
         return false;
     }

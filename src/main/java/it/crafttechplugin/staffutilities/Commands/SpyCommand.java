@@ -1,6 +1,7 @@
 package it.crafttechplugin.staffutilities.Commands;
 
 import it.crafttechplugin.staffutilities.Utils.Color;
+import it.crafttechplugin.staffutilities.Utils.Message;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -14,22 +15,22 @@ public class SpyCommand implements CommandExecutor {
     public static ArrayList<Player> spylogs = new ArrayList<>();
 
     @Override
-    public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
-        if (commandSender instanceof Player) {
-            Player p = (Player) commandSender;
+    public boolean onCommand(CommandSender sender, Command command, String s, String[] strings) {
+        if (sender instanceof Player) {
+            Player p = (Player) sender;
             if(p.hasPermission("staffutilities.spy")){
                 if(spylogs.contains(p)){
                     spylogs.remove(p);
-                    p.sendMessage(Color.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.SpyLogsoff")));
+                    p.sendMessage(Message.SPY_LOGS_OFF.toString());
                 }else {
-                    p.sendMessage(Color.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.SpyLogson")));
+                    p.sendMessage(Message.SPY_LOGS_ON.toString());
                     spylogs.add(p);
                 }
             }else{
-                p.sendMessage(Color.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.noPerms")));
+                p.sendMessage(Message.NO_PERMS.toString());
             }
         } else {
-            commandSender.sendMessage(Color.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.noPerms")));
+            sender.sendMessage(Message.NO_PERMS.toString());
         }
         return false;
     }

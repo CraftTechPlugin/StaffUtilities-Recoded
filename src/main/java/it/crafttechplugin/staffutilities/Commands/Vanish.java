@@ -22,9 +22,9 @@ public class Vanish implements CommandExecutor, Listener {
     public static ArrayList<Player> invisible_list = new ArrayList<>();
 
     @Override
-    public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
-        if (commandSender instanceof Player) {
-            Player p = (Player) commandSender;
+    public boolean onCommand(CommandSender sender, Command command, String s, String[] strings) {
+        if (sender instanceof Player) {
+            Player p = (Player) sender;
             if (p.hasPermission("staffutilities.vanish.use")) {
                 if (strings.length == 0) {
                     if (invisible_list.contains(p)) {
@@ -45,10 +45,10 @@ public class Vanish implements CommandExecutor, Listener {
                     }
                 }
             } else {
-                p.sendMessage(Message.PREFIX.toString() + Message.NO_PERMS);
+                p.sendMessage(Message.NO_PERMS.toString());
             }
         } else {
-            commandSender.sendMessage(Message.PREFIX.toString() + Message.NO_PERMS);
+            sender.sendMessage(Message.NO_PERMS.toString());
         }
         return true;
     }

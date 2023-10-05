@@ -2,6 +2,7 @@ package it.crafttechplugin.staffutilities.Commands;
 
 import it.crafttechplugin.staffutilities.Main;
 import it.crafttechplugin.staffutilities.Utils.Color;
+import it.crafttechplugin.staffutilities.Utils.Message;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -11,38 +12,37 @@ import org.bukkit.entity.Player;
 
 public class Fly implements CommandExecutor {
     @Override
-    public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
-        FileConfiguration msg = Main.msg;
-        if (commandSender instanceof Player) {
-            Player p = (Player) commandSender;
+    public boolean onCommand(CommandSender sender, Command command, String s, String[] strings) {
+        if (sender instanceof Player) {
+            Player p = (Player) sender;
             if (p.hasPermission("staffutilities.fly")) {
                 if(strings.length == 0) {
                     if (p.getAllowFlight()) {
                         p.setAllowFlight(false);
-                        p.sendMessage(Color.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.FlyOff")));
+                        p.sendMessage(Message.FLY_OFF.toString());
                     } else {
                         p.setAllowFlight(true);
-                        p.sendMessage(Color.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.FlyOn")));
+                        p.sendMessage(Message.FLY_ON.toString());
                     }
                 }else{
                     Player target = Bukkit.getPlayer(strings[0]);
                     if(target == null){
-                        p.sendMessage(Color.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.OfflinePlayer")));
+                        p.sendMessage(Message.NO_ARGS.toString());
                     }else{
                         if (target.getAllowFlight()) {
                             target.setAllowFlight(false);
-                            target.sendMessage(Color.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.FlyOff")));
+                            target.sendMessage(Message.FLY_OFF.toString());
                         } else {
                             target.setAllowFlight(true);
-                            target.sendMessage(Color.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.FlyOn")));
+                            target.sendMessage(Message.FLY_ON.toString());
                         }
                     }
                 }
             }else{
-                commandSender.sendMessage(Color.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.noPerms")));
+                p.sendMessage(Message.NO_PERMS.toString());
             }
         }else{
-            commandSender.sendMessage(Color.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.noPerms")));
+            sender.sendMessage(Message.NO_PERMS.toString());
         }
         return false;
     }

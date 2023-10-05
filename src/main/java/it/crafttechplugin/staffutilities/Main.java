@@ -2,8 +2,8 @@ package it.crafttechplugin.staffutilities;
 
 import it.crafttechplugin.staffutilities.Commands.*;
 import it.crafttechplugin.staffutilities.Commands.Teleport.tp;
+import it.crafttechplugin.staffutilities.Commands.Teleport.tpall;
 import it.crafttechplugin.staffutilities.Commands.Teleport.tphere;
-import it.crafttechplugin.staffutilities.Debug.RandomDebug;
 import it.crafttechplugin.staffutilities.UpdateCheck.UpdateChecker;
 import it.crafttechplugin.staffutilities.Utils.Color;
 import it.crafttechplugin.staffutilities.bans.BanManager;
@@ -17,7 +17,6 @@ import it.crafttechplugin.staffutilities.storage.yml.DefaultConfigManager;
 import it.crafttechplugin.staffutilities.storage.yml.InfosYML;
 import it.crafttechplugin.staffutilities.storage.yml.MuteYML;
 import org.apache.commons.dbcp.BasicDataSource;
-import org.bukkit.Bukkit;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -99,6 +98,7 @@ public final class Main extends JavaPlugin implements Listener {
         getCommand("fly").setExecutor(new Fly());
         getCommand("tp").setExecutor(new tp());
         getCommand("tphere").setExecutor(new tphere());
+        getCommand("tpall").setExecutor(new tpall());
         getCommand("staffutilities").setExecutor(new StaffUtilitiesCommand(this));
         getCommand("vanish").setExecutor(new Vanish());
         getCommand("msg").setExecutor(new Msg());
@@ -107,7 +107,6 @@ public final class Main extends JavaPlugin implements Listener {
         getCommand("spy").setExecutor(new SpyCommand());
         getCommand("staffvanish").setExecutor(new StaffVanish());
         getCommand("staffmode").setExecutor(new StaffMode());
-        getCommand("randomtp").setExecutor(new RandomDebug());
     }
 
     public void listeners() {

@@ -1,6 +1,7 @@
 package it.crafttechplugin.staffutilities.Commands.Teleport;
 
 import it.crafttechplugin.staffutilities.Utils.Color;
+import it.crafttechplugin.staffutilities.Utils.Message;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -12,30 +13,28 @@ import org.bukkit.entity.Player;
 import java.io.File;
 
 public class tp implements CommandExecutor {
-    private File msgf;
-    private FileConfiguration msg;
 
 
     @Override
-    public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
-        if(commandSender instanceof Player){
-            Player p = (Player) commandSender;
+    public boolean onCommand(CommandSender sender, Command command, String s, String[] strings) {
+        if(sender instanceof Player){
+            Player p = (Player) sender;
             if(p.hasPermission("staffutilities.tp")){
                 if(strings.length == 0){
-                    p.sendMessage(Color.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.noArguments")));
+                    p.sendMessage(Message.NO_ARGS.toString());
                 }else{
                     Player target = Bukkit.getPlayer(strings[0]);
                     p.teleport(target);
-                    String without = Color.getColor(msg.getString("Messages.Tp"))
+                    String without = Message.TP.toString()
                             .replaceAll("%player%", p.getName());
                     String with = PlaceholderAPI.setPlaceholders(p, without);
-                    p.sendMessage(Color.getColor(msg.getString("Messages.Prefix")+with));
+                    p.sendMessage(with);
                 }
             }else{
-                commandSender.sendMessage(Color.getColor(msg.getString("Messages.Prefix") + msg.getString("Messages.noPerms")));
+                p.sendMessage(Message.NO_PERMS.toString());
             }
         }else{
-            commandSender.sendMessage("Only players can execute this command");
+            sender.sendMessage(Message.NO_PERMS.toString());
         }
         return false;
     }

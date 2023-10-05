@@ -37,7 +37,7 @@ public class Events implements Listener {
             e.setJoinMessage(Color.getColor(Con));
         }else if(p.hasPermission("staffutilities.fly")) {
             if (Main.getInstance().getConfig().getBoolean("join-fly")) {
-                p.setFlying(true);
+                p.setAllowFlight(true);
             }
         }
     }

@@ -55,8 +55,11 @@ public enum Message {
         return ChatColor.translateAlternateColorCodes('&', PREFIX.msg + msg);
     }
 
-    public String toConsoleString() {
-        return toString();
+    public String toSpy() {
+        if(this == SPY_PREFIX){
+            return ChatColor.translateAlternateColorCodes('&', SPY_PREFIX.msg);
+        }
+        return ChatColor.translateAlternateColorCodes('&', PREFIX.msg + msg);
     }
 
 }

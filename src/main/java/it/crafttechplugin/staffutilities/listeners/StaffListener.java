@@ -3,6 +3,7 @@ package it.crafttechplugin.staffutilities.listeners;
 import it.crafttechplugin.staffutilities.Utils.Color;
 import it.crafttechplugin.staffutilities.customApi.randomTpApi;
 import org.bukkit.DyeColor;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -41,35 +42,36 @@ public class StaffListener implements Listener {
     @EventHandler
     public void onInteract2(PlayerInteractEvent e){
         Player p = e.getPlayer();
-        String randomTP = "§e§lRANDOM TP";
-        String vanishon = "§a§lVANISH ON";
-        String vanishoff = "§c§lVANISH OFF";
-        if(e.getPlayer().getItemInHand().getItemMeta().getDisplayName() == randomTP){
-            randomtp(p);
+        if(staffmode_list.contains(p)){
+            ItemStack bussola = new ItemStack(Material.COMPASS);
+            ItemStack vanishon = new ItemStack(DyeColor.GRAY.getData());
+            ItemStack vanishoff = new ItemStack(DyeColor.RED.getData());
+            if(e.getItem() == bussola){
+                randomtp(p);
+            }else if(e.getItem() == vanishon){
+                ItemStack vanish = new ItemStack(DyeColor.RED.getData());
+                ItemMeta vanishmeta = vanish.getItemMeta();
+                vanishmeta.setDisplayName(Color.getColor("&c&lVANISH OFF"));
+                ArrayList<String> vanishlore = new ArrayList<>();
+                vanishlore.add(Color.getColor("&bRight-click to"));
+                vanishlore.add(Color.getColor("&bEnable the vanish"));
+                vanishmeta.setLore(vanishlore);
+                vanish.setItemMeta(vanishmeta);
+                p.getInventory().setItem(8, vanish);
+                disableVanish(p);
 
-        }else if(e.getPlayer().getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase(vanishon)){
-            ItemStack vanish = new ItemStack(DyeColor.RED.getData());
-            ItemMeta vanishmeta = vanish.getItemMeta();
-            vanishmeta.setDisplayName(Color.getColor("&c&lVANISH OFF"));
-            ArrayList<String> vanishlore = new ArrayList<>();
-            vanishlore.add(Color.getColor("&bRight-click to"));
-            vanishlore.add(Color.getColor("&bEnable the vanish"));
-            vanishmeta.setLore(vanishlore);
-            vanish.setItemMeta(vanishmeta);
-            p.getInventory().setItem(8, vanish);
-            disableVanish(p);
-
-        }else if(e.getPlayer().getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase(vanishoff)){
-            ItemStack vanish = new ItemStack(DyeColor.GRAY.getData());
-            ItemMeta vanishmeta = vanish.getItemMeta();
-            vanishmeta.setDisplayName(Color.getColor("&a&lVANISH ON"));
-            ArrayList<String> vanishlore = new ArrayList<>();
-            vanishlore.add(Color.getColor("&bRight-click to"));
-            vanishlore.add(Color.getColor("&bDisable the vanish"));
-            vanishmeta.setLore(vanishlore);
-            vanish.setItemMeta(vanishmeta);
-            p.getInventory().setItem(8, vanish);
-            enableVanish(p);
+            }else if(e.getItem() == vanishoff){
+                ItemStack vanish = new ItemStack(DyeColor.GRAY.getData());
+                ItemMeta vanishmeta = vanish.getItemMeta();
+                vanishmeta.setDisplayName(Color.getColor("&a&lVANISH ON"));
+                ArrayList<String> vanishlore = new ArrayList<>();
+                vanishlore.add(Color.getColor("&bRight-click to"));
+                vanishlore.add(Color.getColor("&bDisable the vanish"));
+                vanishmeta.setLore(vanishlore);
+                vanish.setItemMeta(vanishmeta);
+                p.getInventory().setItem(8, vanish);
+                enableVanish(p);
+            }
         }
     }
 
