@@ -14,6 +14,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 
+import static it.crafttechplugin.staffutilities.Commands.Vanish.invisible_list;
+
 public class StaffMode implements CommandExecutor {
     public static ArrayList<Player> staffmode_list = new ArrayList<>();
 
@@ -22,6 +24,7 @@ public class StaffMode implements CommandExecutor {
             Player p = (Player)sender;
             if (p.hasPermission("staffutilities.staffmode")) {
                 if (!staffmode_list.contains(p)) {
+                    p.getInventory().clear();
                     p.setAllowFlight(true);
                     ItemStack randomtp = new ItemStack(Material.COMPASS);
                     ItemMeta randomtpmeta = randomtp.getItemMeta();
@@ -41,8 +44,8 @@ public class StaffMode implements CommandExecutor {
                     loreinvsee.add(Color.getColor("&bInventory."));
                     randomtpmeta.setLore(loreinvsee);
                     invsee.setItemMeta(invseemeta);
-                    if (!Vanish.invisible_list.contains(p)) {
-                        Vanish.invisible_list.add(p);
+                    if (!invisible_list.contains(p)) {
+                        invisible_list.add(p);
                         ItemStack vanish = new ItemStack(DyeColor.RED.getData());
                         ItemMeta vanishmeta = vanish.getItemMeta();
                         vanishmeta.setDisplayName(Color.getColor("&c&lVANISH OFF"));

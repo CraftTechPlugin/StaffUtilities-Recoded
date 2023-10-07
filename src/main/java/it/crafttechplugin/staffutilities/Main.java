@@ -1,9 +1,9 @@
 package it.crafttechplugin.staffutilities;
 
 import it.crafttechplugin.staffutilities.Commands.*;
-import it.crafttechplugin.staffutilities.Commands.Teleport.tp;
-import it.crafttechplugin.staffutilities.Commands.Teleport.tpall;
-import it.crafttechplugin.staffutilities.Commands.Teleport.tphere;
+import it.crafttechplugin.staffutilities.Commands.Teleport.Tp;
+import it.crafttechplugin.staffutilities.Commands.Teleport.TpAll;
+import it.crafttechplugin.staffutilities.Commands.Teleport.TpHere;
 import it.crafttechplugin.staffutilities.UpdateCheck.UpdateChecker;
 import it.crafttechplugin.staffutilities.Utils.Color;
 import it.crafttechplugin.staffutilities.bans.BanManager;
@@ -92,14 +92,13 @@ public final class Main extends JavaPlugin implements Listener {
         getCommand("mute").setExecutor(new Moderation());
         getCommand("unmute").setExecutor(new Moderation());
         getCommand("bansystem").setExecutor(new Moderation());
-        getCommand("invsee").setExecutor(new InvSee());
+        getCommand("invsee").setExecutor(new Invsee());
         getCommand("enderchest").setExecutor(new EnderChest());
         getCommand("gmc").setExecutor(new Gmc());
         getCommand("fly").setExecutor(new Fly());
-        getCommand("tp").setExecutor(new tp());
-        getCommand("tphere").setExecutor(new tphere());
-        getCommand("tpall").setExecutor(new tpall());
-        getCommand("staffutilities").setExecutor(new StaffUtilitiesCommand(this));
+        getCommand("tp").setExecutor(new Tp());
+        getCommand("tphere").setExecutor(new TpHere());
+        getCommand("tpall").setExecutor(new TpAll());
         getCommand("vanish").setExecutor(new Vanish());
         getCommand("msg").setExecutor(new Msg());
         getCommand("staffmode").setExecutor(new StaffMode());

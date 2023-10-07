@@ -19,7 +19,9 @@ public class PlayerJoin implements Listener {
 
         playerInfos.update(player);
 
-        spylogs.add(player);
+        if(e.getPlayer().hasPermission("staffutilities.spy")){
+            spylogs.add(player);
+        }
     }
 
     @EventHandler

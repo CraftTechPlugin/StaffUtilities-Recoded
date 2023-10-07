@@ -1,29 +1,32 @@
 package it.crafttechplugin.staffutilities.Commands;
 
-import it.crafttechplugin.staffutilities.Main;
-import it.crafttechplugin.staffutilities.Utils.Color;
 import it.crafttechplugin.staffutilities.Utils.Message;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 
-public class InvSee implements CommandExecutor {
+public class Invsee implements CommandExecutor {
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String s, String[] strings) {
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] strings) {
         if(sender instanceof Player){
-            Player p = (Player) sender;
-            if(p.hasPermission("staffutilities.invsee")){
+            Player player = (Player) sender;
+            if(player.hasPermission("staffutilities.invsee")){
                 if(strings.length == 0){
-                    p.sendMessage(Message.NO_ARGS.toString());
+                    player.sendMessage(Message.NO_ARGS.toString());
                 }else{
                     Player target = Bukkit.getPlayer(strings[0]);
-                    p.openInventory(target.getInventory());
+                    if(target == null){
+                        player.sendMessage(Message.OFFLINE_PLAYER.toString());
+                    }else{
+                        Inventory targetInventory = target.getInventory();
+                        player.openInventory(targetInventory);
+                    }
                 }
             }else{
-                p.sendMessage(Message.NO_PERMS.toString());
+                player.sendMessage(Message.NO_PERMS.toString());
             }
         }else{
             sender.sendMessage(Message.NO_PERMS.toString());

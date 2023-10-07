@@ -1,6 +1,5 @@
 package it.crafttechplugin.staffutilities.Commands;
 
-import it.crafttechplugin.staffutilities.Utils.Color;
 import it.crafttechplugin.staffutilities.Utils.Message;
 import me.frep.vulcan.api.VulcanAPI;
 import net.luckperms.api.LuckPermsProvider;
@@ -14,7 +13,6 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 
 import static it.crafttechplugin.staffutilities.Commands.SpyCommand.spylogs;
-import static it.crafttechplugin.staffutilities.Main.msg;
 
 public class StaffVanish implements CommandExecutor {
     public static ArrayList<Player> svlist = new ArrayList<>();

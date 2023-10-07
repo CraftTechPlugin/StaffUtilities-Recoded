@@ -1,38 +1,31 @@
 package it.crafttechplugin.staffutilities.Commands.Teleport;
 
-import it.crafttechplugin.staffutilities.Main;
-import it.crafttechplugin.staffutilities.Utils.Color;
 import it.crafttechplugin.staffutilities.Utils.Message;
-import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
-import java.io.File;
-
-public class tphere implements CommandExecutor {
-
-
+public class TpHere implements CommandExecutor {
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String s, String[] strings) {
-        if(sender instanceof Player){
-            Player p = (Player) sender;
-            if(p.hasPermission("staffutilities.tphere")){
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] strings) {
+        if(sender instanceof Player) {
+            Player player = (Player) sender;
+            if(player.hasPermission("staffutilities.tphere")){
                 if(strings.length == 0){
-                    p.sendMessage(Message.NO_ARGS.toString());
+                    player.sendMessage(Message.NO_ARGS.toString());
                 }else{
                     Player target = Bukkit.getPlayer(strings[0]);
-                    target.teleport(p);
-                    String without = Message.TP_HERE.toString()
-                            .replaceAll("%player%", p.getName());
-                    String with = PlaceholderAPI.setPlaceholders(p, without);
-                    p.sendMessage(with);
+                    if(target == null){
+                        player.sendMessage(Message.OFFLINE_PLAYER.toString());
+                    }else{
+                        target.teleport(player.getLocation());
+                        player.sendMessage(Message.TP_HERE.toString());
+                    }
                 }
             }else{
-                p.sendMessage(Message.NO_PERMS.toString());
+                player.sendMessage(Message.TP_HERE.toString());
             }
         }else{
             sender.sendMessage(Message.NO_PERMS.toString());

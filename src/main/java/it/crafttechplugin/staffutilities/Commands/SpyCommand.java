@@ -1,6 +1,5 @@
 package it.crafttechplugin.staffutilities.Commands;
 
-import it.crafttechplugin.staffutilities.Utils.Color;
 import it.crafttechplugin.staffutilities.Utils.Message;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -8,8 +7,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
-
-import static it.crafttechplugin.staffutilities.Main.msg;
 
 public class SpyCommand implements CommandExecutor {
     public static ArrayList<Player> spylogs = new ArrayList<>();

@@ -1,14 +1,11 @@
 package it.crafttechplugin.staffutilities.Commands;
 
-import it.crafttechplugin.staffutilities.Main;
-import it.crafttechplugin.staffutilities.Utils.Color;
 import it.crafttechplugin.staffutilities.Utils.Message;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
 public class Report implements CommandExecutor {

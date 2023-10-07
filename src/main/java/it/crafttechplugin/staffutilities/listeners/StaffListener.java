@@ -1,7 +1,7 @@
 package it.crafttechplugin.staffutilities.listeners;
 
 import it.crafttechplugin.staffutilities.Utils.Color;
-import it.crafttechplugin.staffutilities.customApi.randomTpApi;
+import org.bukkit.Bukkit;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -17,15 +17,10 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 import static it.crafttechplugin.staffutilities.Commands.StaffMode.staffmode_list;
-import static it.crafttechplugin.staffutilities.customApi.inventoryApi.getDisplayName;
-import static it.crafttechplugin.staffutilities.customApi.inventoryApi.setPlayerInventoryItem;
+import static it.crafttechplugin.staffutilities.Commands.Vanish.invisible_list;
 import static it.crafttechplugin.staffutilities.customApi.randomTpApi.randomtp;
-import static it.crafttechplugin.staffutilities.customApi.vanishApi.disableVanish;
-import static it.crafttechplugin.staffutilities.customApi.vanishApi.enableVanish;
 
 public class StaffListener implements Listener {
 
@@ -58,7 +53,10 @@ public class StaffListener implements Listener {
                 vanishmeta.setLore(vanishlore);
                 vanish.setItemMeta(vanishmeta);
                 p.getInventory().setItem(8, vanish);
-                disableVanish(p);
+                invisible_list.remove(p);
+                for(Player people : Bukkit.getOnlinePlayers()){
+                    people.showPlayer(p);
+                }
 
             }else if(e.getItem() == vanishoff){
                 ItemStack vanish = new ItemStack(DyeColor.GRAY.getData());
@@ -70,7 +68,12 @@ public class StaffListener implements Listener {
                 vanishmeta.setLore(vanishlore);
                 vanish.setItemMeta(vanishmeta);
                 p.getInventory().setItem(8, vanish);
-                enableVanish(p);
+                invisible_list.add(p);
+                for(Player people : Bukkit.getOnlinePlayers()){
+                    if(!people.hasPermission("staffutilities.vanish.see")){
+                        people.hidePlayer(p);
+                    }
+                }
             }
         }
     }

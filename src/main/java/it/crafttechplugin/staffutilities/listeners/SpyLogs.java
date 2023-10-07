@@ -15,7 +15,7 @@ public class SpyLogs implements Listener {
     public void onmsg(PlayerCommandPreprocessEvent e){
         for(Player people : Bukkit.getOnlinePlayers()){
             if(spylogs.contains(people)) {
-                people.sendMessage(Color.getColor(msg.getString("Messages.SpyPrefix") + e.getMessage()));
+                people.sendMessage(Color.getColor(e.getPlayer().getName() + "&7executed command" + e.getMessage()));
             }
         }
     }
