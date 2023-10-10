@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>it.reddo</groupId>
-    <artifactId>StaffUtilities</artifactId>
+    <groupId>it.crafttechplugin</groupId>
+    <artifactId>staffutilities</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
 
@@ -80,13 +80,6 @@
             <groupId>commons-dbcp</groupId>
             <artifactId>commons-dbcp</artifactId>
             <version>1.4</version>
-        </dependency>
-        <dependency>
-            <groupId>me.frap.vulcan.api</groupId>
-            <artifactId>VulcanAPI</artifactId>
-            <version>1.0</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/src/main/java/it/crafttechplugin/staffutilities/MavenApi/VulcanAPI.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>net.luckperms</groupId>

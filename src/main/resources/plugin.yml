@@ -30,11 +30,4 @@ commands:
   bansystem:
   msg:
   freeze:
-  staffvanish:
-    aliases:
-      - sv
-  spy:
-  staffmode:
-    aliases:
-      - sm
   randomtp:

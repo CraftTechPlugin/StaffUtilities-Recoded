@@ -96,16 +96,13 @@ public final class Main extends JavaPlugin implements Listener {
         getCommand("enderchest").setExecutor(new EnderChest());
         getCommand("gmc").setExecutor(new Gmc());
         getCommand("fly").setExecutor(new Fly());
+        getCommand("staffutilities").setExecutor(new StaffUtilities());
         getCommand("tp").setExecutor(new Tp());
         getCommand("tphere").setExecutor(new TpHere());
         getCommand("tpall").setExecutor(new TpAll());
         getCommand("vanish").setExecutor(new Vanish());
         getCommand("msg").setExecutor(new Msg());
-        getCommand("staffmode").setExecutor(new StaffMode());
         getCommand("freeze").setExecutor(new Freeze());
-        getCommand("spy").setExecutor(new SpyCommand());
-        getCommand("staffvanish").setExecutor(new StaffVanish());
-        getCommand("staffmode").setExecutor(new StaffMode());
     }
 
     public void listeners() {
@@ -113,12 +110,9 @@ public final class Main extends JavaPlugin implements Listener {
 
         pm.registerEvents(new PlayerChat(), this);
         pm.registerEvents(new PlayerJoin(), this);
-        pm.registerEvents(new StaffListener(), this);
         pm.registerEvents(new Events(), this);
         pm.registerEvents(new JoinMessage(), this);
         pm.registerEvents(new VanishListener(), this);
-        pm.registerEvents(new SpyLogs(), this);
-        pm.registerEvents(new StaffListener(), this);
     }
 
     @Override
@@ -128,7 +122,7 @@ public final class Main extends JavaPlugin implements Listener {
         Double cVersion = 1.0;
 
         if (cup) {
-            new UpdateChecker(this, 108874).getLastestVersion(version -> {
+            new UpdateChecker(this, 113034).getLastestVersion(version -> {
 
                 if (this.getDescription().getVersion().equalsIgnoreCase(version)) {
 
