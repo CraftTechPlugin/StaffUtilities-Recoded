@@ -1,0 +1,28 @@
+Buttons:
+  Cheating:
+    Message: "&c&l[Cheating]"
+    Command: "/tempban %player% 30d Cheating -s"
+  Admit:
+    Message: "&e&l[ADMIT]"
+    Command: "/tempban %player% 14d Admit to cheating -s"
+  Refuse:
+    Message: "&4&l[REFUSE]"
+    Command: "/tempban %player% 30d Refuse to screenshare"
+  Quit:
+    Message: "&5&l[QUIT]"
+    Command: "/tempban %player% 30d Slog under screenshare"
+  Clean:
+    Message: "&a&l[CLEAN]"
+    Command: "/clean %player%"
+
+HubLobby:
+  World: World
+  X: 0
+  Y: 100
+  Z: 0
+
+ScreenShareLobby:
+  World: Screenshare
+  X: 0
+  Y: 100
+  Z: 0

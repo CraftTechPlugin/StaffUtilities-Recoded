@@ -30,4 +30,7 @@ commands:
   bansystem:
   msg:
   freeze:
-  randomtp:
+  ss:
+  clean:
+  eat:
+  heal:

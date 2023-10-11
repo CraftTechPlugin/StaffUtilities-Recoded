@@ -27,15 +27,13 @@ public enum Message {
     FREEZE_OFF(Main.msg.getString("Messages.FreezeOff")),
     REPORT_SUCCESS(Main.msg.getString("Messages.ReportSuccess")),
     REPORT_RECEIVED(Main.msg.getString("Messages.ReportReceived")),
-    ITEM_FIXED(Main.msg.getString("Messages.ItemFixed")),
-    INVENTORY_FIXED(Main.msg.getString("Messages.InventoryFixed")),
-    STAFF_VANISH_ON(Main.msg.getString("Messages.StaffVanishon")),
-    STAFF_VANISH_OFF(Main.msg.getString("Messages.StaffVanishoff")),
-    SPY_LOGS_ON(Main.msg.getString("Messages.SpyLogson")),
-    SPY_LOGS_OFF(Main.msg.getString("Messages.SpyLogsoff")),
-    SPY_PREFIX(Main.msg.getString("Messages.SpyPrefix")),
-    STAFF_MODE_ON(Main.msg.getString("Messages.StaffModeon")),
-    STAFF_MODE_OFF(Main.msg.getString("Messages.StaffModeoff"));
+    SCREENSHARE_BYPASS(Main.msg.getString("Messages.ScreenshareBypass")),
+    STARTSCREENSHARE(Main.msg.getString("Messages.ScreenshareStart")),
+    ENDSCREENSHARE(Main.msg.getString("Messages.ScreenshareEnd")),
+    SCREENSHAREQUIT(Main.msg.getString("Messages.ScreenshareQuit")),
+    NOTINSCREENSHARE(Main.msg.getString("Messages.NotInScreenshare")),
+    EAT(Main.msg.getString("Messages.Eat")),
+    HEAL(Main.msg.getString("Messages.Heal"));
 
 
 
@@ -51,13 +49,6 @@ public enum Message {
     public String toString() {
         if (this == PREFIX) {
             return ChatColor.translateAlternateColorCodes('&', PREFIX.msg);
-        }
-        return ChatColor.translateAlternateColorCodes('&', PREFIX.msg + msg);
-    }
-
-    public String toSpy() {
-        if(this == SPY_PREFIX){
-            return ChatColor.translateAlternateColorCodes('&', SPY_PREFIX.msg);
         }
         return ChatColor.translateAlternateColorCodes('&', PREFIX.msg + msg);
     }
