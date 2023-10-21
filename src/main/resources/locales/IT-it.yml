@@ -1,0 +1,36 @@
+#     _____ __        ________      __  ____  _ ___ __  _
+#    / ___// /_____ _/ __/ __/     / / / / /_(_) (_) /_(_)__  _____
+#    \__ \/ __/ __ `/ /_/ /_______/ / / / __/ / / / __/ / _ \/ ___/
+#   ___/ / /_/ /_/ / __/ __/_____/ /_/ / /_/ / / / /_/ /  __(__  )
+#  /____/\__/\__,_/_/ /_/        \____/\__/_/_/_/\__/_/\___/____/
+#
+
+# Internal Placeholders List
+#
+# %player% - Get player name
+
+Messages:
+  Prefix: "&b&lSTAFFUTILITIES &7» "
+  noPerms: "&cNessun permesso."
+  JoinMessage: "%luckperms_prefix%%player% &7è entrato nel servver"
+  PLHider: "&e%player% Ha provato a vedere i plugn del server."
+  FlyOff: "&eFly &cdisattivata."
+  FlyOn: "&eFly &aattivata."
+  GmcOff: "&eCreative &cdisattivata."
+  GmcOn: "&eCreative &aattivata."
+  VanishOff: "&eVanish &cdisattiata."
+  VanishOn: "&eVanish &aattivata."
+  Tp: "&eTi sei teletrasportato da %player%."
+  TpHere: "&eHai teletrasportato %player% da te."
+  Tpall: "&eHai teletrasportato tutti i giocatori da te."
+  noArgs: "&cInserisci un argomento!"
+  reload: "&aReload completato!"
+  OfflinePlayer: "&cGiocatore offline!"
+  received-msg: "&7(Da %sender%) » "
+  sended-msg: "&7(A %receiver%) » "
+  FreezeOn: "&e%player% è stato freezato."
+  FreezeOff: "&e%player% è stato unfrezzato."
+  ReportSuccess: "&aHai reportato %target% con successo."
+  ReportReceived: "&e%player% ha reportato %target%."
+  Eat: "&eTi sei saziato."
+  Health: "&eTi sei curato."

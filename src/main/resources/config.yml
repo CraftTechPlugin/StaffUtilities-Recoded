@@ -8,7 +8,7 @@
 # For support: https://discord.gg/rEpd6P7J8X
 
 #DON'T TOUCH THIS
-version: 1.0
+version: 1.1
 
 #configure database (MySQL)
 db:
@@ -34,3 +34,6 @@ moderation-feature: true #default (true)
 
 #set default gamemode on join
 gamemode-on-join: survival #default (survival)
+
+#set config lenguage
+lenguage: en #(en/it)

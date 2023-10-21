@@ -1,9 +1,11 @@
 package it.crafttechplugin.staffutilities.listeners;
 
+import it.crafttechplugin.staffutilities.Commands.Vanish;
 import it.crafttechplugin.staffutilities.Main;
 import it.crafttechplugin.staffutilities.Utils.Color;
 import it.crafttechplugin.staffutilities.Utils.Message;
 import me.clip.placeholderapi.PlaceholderAPI;
+import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -11,6 +13,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+
+import static it.crafttechplugin.staffutilities.Commands.Vanish.invisible_list;
 
 public class Events implements Listener {
 
@@ -29,7 +33,13 @@ public class Events implements Listener {
         } else if (getGameMode == "adventure") {
             p.setGameMode(GameMode.ADVENTURE);
         }
-
+        for(Player onlinePlayers : Bukkit.getOnlinePlayers()){
+            if(invisible_list.contains(onlinePlayers)){
+                if(!p.hasPermission("staffutilities.vanish.see")) {
+                    p.hidePlayer(onlinePlayers);
+                }
+            }
+        }
         //Join Message & Fly
         if (Main.getInstance().getConfig().getBoolean("join-message.Enabled")) {
             String Senza = Color.getColor(Message.JOIN_MESSAGE.toString()).replaceAll("%player%", p.getName());

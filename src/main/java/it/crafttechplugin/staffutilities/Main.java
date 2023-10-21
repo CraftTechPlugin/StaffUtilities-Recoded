@@ -12,8 +12,6 @@ import it.crafttechplugin.staffutilities.database.MySQL;
 import it.crafttechplugin.staffutilities.infos.PlayerInfos;
 import it.crafttechplugin.staffutilities.listeners.*;
 import it.crafttechplugin.staffutilities.mutes.MuteManager;
-import it.crafttechplugin.staffutilities.screenshare.clean;
-import it.crafttechplugin.staffutilities.screenshare.ss;
 import it.crafttechplugin.staffutilities.storage.yml.BanYML;
 import it.crafttechplugin.staffutilities.storage.yml.DefaultConfigManager;
 import it.crafttechplugin.staffutilities.storage.yml.InfosYML;
@@ -64,35 +62,52 @@ public final class Main extends JavaPlugin implements Listener {
 
 
     public void createFiles() {
-        configf = new File(getDataFolder(), "config.yml");
-        ss = new File(getDataFolder(), "screenshare.yml");
-        msgf = new File(getDataFolder(), "locales/EN-en.yml");
+        if(config.getString("lenguage").equalsIgnoreCase("en")) {
+            configf = new File(getDataFolder(), "config.yml");
+            msgf = new File(getDataFolder(), "locales/EN-en.yml");
 
-        if (!configf.exists()) {
-            configf.getParentFile().mkdirs();
-            saveResource("config.yml", false);
-        }
+            if (!configf.exists()) {
+                configf.getParentFile().mkdirs();
+                saveResource("config.yml", false);
+            }
 
-        if (!msgf.exists()) {
-            msgf.getParentFile().mkdirs();
-            saveResource("locales/EN-en.yml", false);
-        }
-
-        if (!ss.exists()) {
-            msgf.getParentFile().mkdirs();
-            saveResource("screenshare.yml", false);
-        }
-        config = new YamlConfiguration();
-        msg = new YamlConfiguration();
-        screenshareconfig = new YamlConfiguration();
+            if (!msgf.exists()) {
+                msgf.getParentFile().mkdirs();
+                saveResource("locales/EN-en.yml", false);
+            }
+            config = new YamlConfiguration();
+            msg = new YamlConfiguration();
 
 
-        try {
-            msg.load(msgf);
-            config.load(configf);
-            screenshareconfig.load(ss);
-        } catch (IOException | InvalidConfigurationException e) {
-            throw new RuntimeException(e);
+            try {
+                msg.load(msgf);
+                config.load(configf);
+            } catch (IOException | InvalidConfigurationException e) {
+                throw new RuntimeException(e);
+            }
+        }else if(config.getString("lenguage").equalsIgnoreCase("it")){
+            configf = new File(getDataFolder(), "config.yml");
+            msgf = new File(getDataFolder(), "locales/IT-it.yml");
+
+            if (!configf.exists()) {
+                configf.getParentFile().mkdirs();
+                saveResource("config.yml", false);
+            }
+
+            if (!msgf.exists()) {
+                msgf.getParentFile().mkdirs();
+                saveResource("locales/IT-it.yml", false);
+            }
+            config = new YamlConfiguration();
+            msg = new YamlConfiguration();
+
+
+            try {
+                msg.load(msgf);
+                config.load(configf);
+            } catch (IOException | InvalidConfigurationException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
@@ -113,8 +128,6 @@ public final class Main extends JavaPlugin implements Listener {
         getCommand("vanish").setExecutor(new Vanish());
         getCommand("msg").setExecutor(new Msg());
         getCommand("freeze").setExecutor(new Freeze());
-        getCommand("ss").setExecutor(new ss());
-        getCommand("clean").setExecutor(new clean());
         getCommand("eat").setExecutor(new Eat());
         getCommand("heal").setExecutor(new Heal());
     }
